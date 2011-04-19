@@ -27,7 +27,15 @@ Actions
 * `start()` - starts the daemon (creates PID and daemonizes).
 * `stop()` - stops the daemon (stops the child process and removes the PID).
 * `restart()` - does `stop()` then `start()`.
-* `foreground()` - starts everything as if it were going to run normally but doesn't daemonize. Killing the open shell will then kill the process. Useful for debugging.
+
+Foreground
+---------------------
+
+This is useful for debugging because you can start the code without making it a daemon. The running script then depends on the open shell like any normal Python script.
+
+To do this, just call the `run()` method directly.
+
+	pineMarten.run()
 
 Continuous execution
 ---------------------
