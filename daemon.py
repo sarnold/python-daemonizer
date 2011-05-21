@@ -33,13 +33,14 @@ class Daemon:
 	
 	Usage: subclass the Daemon class and override the run() method
 	"""
-	def __init__(self, pidfile, stdin=os.devnull, stdout=os.devnull, stderr=os.devnull, home_dir='.', verbose=1):
+	def __init__(self, pidfile, stdin=os.devnull, stdout=os.devnull, stderr=os.devnull, home_dir='.', umask=022, verbose=1):
 		self.stdin = stdin
 		self.stdout = stdout
 		self.stderr = stderr
 		self.pidfile = pidfile
 		self.home_dir = home_dir
 		self.verbose = verbose
+		self.umask = umask
 		self.daemon_alive = True
 	
 	def daemonize(self):
@@ -60,7 +61,7 @@ class Daemon:
 		# Decouple from parent environment
 		os.chdir(self.home_dir)
 		os.setsid() 
-		os.umask(0) 
+		os.umask(self.umask)
 	
 		# Do second fork
 		try: 
