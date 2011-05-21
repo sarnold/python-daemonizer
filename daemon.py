@@ -24,8 +24,8 @@ import atexit
 import os
 import sys
 import time
+import signal
 
-from signal import SIGTERM 
 
 class Daemon:
 	"""
@@ -38,6 +38,7 @@ class Daemon:
 		self.stdout = stdout
 		self.stderr = stderr
 		self.pidfile = pidfile
+		self.daemon_alive = True
 	
 	def daemonize(self):
 		"""
@@ -79,7 +80,12 @@ class Daemon:
 			os.dup2(si.fileno(), sys.stdin.fileno())
 			os.dup2(so.fileno(), sys.stdout.fileno())
 			os.dup2(se.fileno(), sys.stderr.fileno())
-		
+
+		def sigtermhandler(signum, frame):
+			self.daemon_alive = False
+		signal.signal(signal.SIGTERM, sigtermhandler)
+		signal.signal(signal.SIGINT, sigtermhandler)
+
 		print "Started"
 		
 		# Write pidfile
@@ -146,7 +152,7 @@ class Daemon:
 		# Try killing the daemon process	
 		try:
 			while 1:
-				os.kill(pid, SIGTERM)
+				os.kill(pid, signal.SIGTERM)
 				time.sleep(0.1)
 		except OSError, err:
 			err = str(err)
