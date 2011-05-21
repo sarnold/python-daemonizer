@@ -33,12 +33,13 @@ class Daemon:
 	
 	Usage: subclass the Daemon class and override the run() method
 	"""
-	def __init__(self, pidfile, stdin=os.devnull, stdout=os.devnull, stderr=os.devnull, home_dir='.'):
+	def __init__(self, pidfile, stdin=os.devnull, stdout=os.devnull, stderr=os.devnull, home_dir='.', verbose=1):
 		self.stdin = stdin
 		self.stdout = stdout
 		self.stderr = stderr
 		self.pidfile = pidfile
 		self.home_dir = home_dir
+		self.verbose = verbose
 		self.daemon_alive = True
 	
 	def daemonize(self):
@@ -87,7 +88,8 @@ class Daemon:
 		signal.signal(signal.SIGTERM, sigtermhandler)
 		signal.signal(signal.SIGINT, sigtermhandler)
 
-		print "Started"
+		if self.verbose >= 1:
+			print "Started"
 		
 		# Write pidfile
 		atexit.register(self.delpid) # Make sure pid file is removed if we quit
@@ -102,7 +104,8 @@ class Daemon:
 		Start the daemon
 		"""
 		
-		print "Starting..."
+		if self.verbose >= 1:
+			print "Starting..."
 		
 		# Check for a pidfile to see if the daemon already runs
 		try:
@@ -128,7 +131,8 @@ class Daemon:
 		Stop the daemon
 		"""
 		
-		print "Stopping..."
+		if self.verbose >= 1:
+			print "Stopping..."
 		
 		# Get the pid from the pidfile
 		try:
@@ -164,7 +168,8 @@ class Daemon:
 				print str(err)
 				sys.exit(1)
 		
-		print "Stopped"
+		if self.verbose >= 1:
+			print "Stopped"
 
 	def restart(self):
 		"""
