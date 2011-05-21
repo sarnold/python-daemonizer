@@ -79,7 +79,10 @@ class Daemon:
 			sys.stderr.flush()
 			si = file(self.stdin, 'r')
 			so = file(self.stdout, 'a+')
-			se = file(self.stderr, 'a+', 0)
+			if self.stderr:
+				se = file(self.stderr, 'a+', 0)
+			else:
+				se = so
 			os.dup2(si.fileno(), sys.stdin.fileno())
 			os.dup2(so.fileno(), sys.stdout.fileno())
 			os.dup2(se.fileno(), sys.stderr.fileno())
