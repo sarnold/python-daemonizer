@@ -33,11 +33,12 @@ class Daemon:
 	
 	Usage: subclass the Daemon class and override the run() method
 	"""
-	def __init__(self, pidfile, stdin=os.devnull, stdout=os.devnull, stderr=os.devnull):
+	def __init__(self, pidfile, stdin=os.devnull, stdout=os.devnull, stderr=os.devnull, home_dir='.'):
 		self.stdin = stdin
 		self.stdout = stdout
 		self.stderr = stderr
 		self.pidfile = pidfile
+		self.home_dir = home_dir
 		self.daemon_alive = True
 	
 	def daemonize(self):
@@ -56,7 +57,7 @@ class Daemon:
 			sys.exit(1)
 		
 		# Decouple from parent environment
-		os.chdir("/") 
+		os.chdir(self.home_dir)
 		os.setsid() 
 		os.umask(0) 
 	
