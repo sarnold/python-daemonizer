@@ -142,14 +142,7 @@ class Daemon(object):
             print "Stopping..."
 
         # Get the pid from the pidfile
-        try:
-            pf = file(self.pidfile, 'r')
-            pid = int(pf.read().strip())
-            pf.close()
-        except IOError:
-            pid = None
-        except ValueError:
-            pid = None
+        pid = self.get_pid()
 
         if not pid:
             message = "pidfile %s does not exist. Not running?\n"
@@ -189,6 +182,17 @@ class Daemon(object):
         """
         self.stop()
         self.start()
+
+    def get_pid(self):
+        try:
+            pf = file(self.pidfile, 'r')
+            pid = int(pf.read().strip())
+            pf.close()
+        except IOError:
+            pid = None
+        except SystemExit:
+            pid = None
+        return pid
 
     def run(self):
         """
