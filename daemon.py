@@ -1,22 +1,24 @@
 '''
-        ***
-        Modified generic daemon class
-        ***
+***
+Modified generic daemon class
+***
 
-        Author:         http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/
-                                www.boxedice.com
+Author:         http://www.jejik.com/articles/2007/02/
+                        a_simple_unix_linux_daemon_in_python/www.boxedice.com
 
-        License:        http://creativecommons.org/licenses/by-sa/3.0/
+License:        http://creativecommons.org/licenses/by-sa/3.0/
 
-        Changes:        23rd Jan 2009 (David Mytton <david@boxedice.com>)
-                                - Replaced hard coded '/dev/null in __init__ with os.devnull
-                                - Added OS check to conditionally remove code that doesn't work on OS X
-                                - Added output to console on completion
-                                - Tidied up formatting
-                                11th Mar 2009 (David Mytton <david@boxedice.com>)
-                                - Fixed problem with daemon exiting on Python 2.4 (before SystemExit was part of the Exception base)
-                                13th Aug 2010 (David Mytton <david@boxedice.com>
-                                - Fixed unhandled exception if PID file is empty
+Changes:        23rd Jan 2009 (David Mytton <david@boxedice.com>)
+                - Replaced hard coded '/dev/null in __init__ with os.devnull
+                - Added OS check to conditionally remove code that doesn't
+                  work on OS X
+                - Added output to console on completion
+                - Tidied up formatting
+                11th Mar 2009 (David Mytton <david@boxedice.com>)
+                - Fixed problem with daemon exiting on Python 2.4
+                  (before SystemExit was part of the Exception base)
+                13th Aug 2010 (David Mytton <david@boxedice.com>
+                - Fixed unhandled exception if PID file is empty
 '''
 
 # Core modules
@@ -33,7 +35,9 @@ class Daemon(object):
 
     Usage: subclass the Daemon class and override the run() method
     """
-    def __init__(self, pidfile, stdin=os.devnull, stdout=os.devnull, stderr=os.devnull, home_dir='.', umask=022, verbose=1):
+    def __init__(self, pidfile, stdin=os.devnull,
+                 stdout=os.devnull, stderr=os.devnull,
+                 home_dir='.', umask=022, verbose=1):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -91,8 +95,8 @@ class Daemon(object):
 
         def sigtermhandler(signum, frame):
             self.daemon_alive = False
-        signal.signal(signal.SIGTERM, sigtermhandler)
-        signal.signal(signal.SIGINT, sigtermhandler)
+            signal.signal(signal.SIGTERM, sigtermhandler)
+            signal.signal(signal.SIGINT, sigtermhandler)
 
         if self.verbose >= 1:
             print "Started"
@@ -201,6 +205,7 @@ class Daemon(object):
 
     def run(self):
         """
-        You should override this method when you subclass Daemon. It will be called after the process has been
+        You should override this method when you subclass Daemon.
+        It will be called after the process has been
         daemonized by start() or restart().
         """
