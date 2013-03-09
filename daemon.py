@@ -194,6 +194,11 @@ class Daemon(object):
             pid = None
         return pid
 
+    def is_running(self):
+        pid = self.get_pid()
+        print(pid)
+        return pid and os.path.exists('/proc/%d' % pid)
+
     def run(self):
         """
         You should override this method when you subclass Daemon. It will be called after the process has been
