@@ -22,6 +22,7 @@ Changes:        23rd Jan 2009 (David Mytton <david@boxedice.com>)
 '''
 
 # Core modules
+from __future__ import print_function
 import atexit
 import errno
 import os
@@ -47,6 +48,10 @@ class Daemon(object):
         self.verbose = verbose
         self.umask = umask
         self.daemon_alive = True
+
+    def log(self, *args):
+        if self.verbose >= 1:
+            print(*args)
 
     def daemonize(self):
         """
@@ -99,8 +104,7 @@ class Daemon(object):
             signal.signal(signal.SIGTERM, sigtermhandler)
             signal.signal(signal.SIGINT, sigtermhandler)
 
-        if self.verbose >= 1:
-            print "Started"
+        self.log("Started")
 
         # Write pidfile
         atexit.register(
@@ -125,8 +129,7 @@ class Daemon(object):
         Start the daemon
         """
 
-        if self.verbose >= 1:
-            print "Starting..."
+        self.log("Starting...")
 
         # Check for a pidfile to see if the daemon already runs
         try:
@@ -153,7 +156,7 @@ class Daemon(object):
         """
 
         if self.verbose >= 1:
-            print "Stopping..."
+            self.log("Stopping...")
 
         # Get the pid from the pidfile
         pid = self.get_pid()
@@ -180,15 +183,14 @@ class Daemon(object):
                     os.kill(pid, signal.SIGHUP)
         except OSError as err:
             err = str(err)
-            if err.find("No such process") > 0:
+            if err.errno == errno.ESRCH:
                 if os.path.exists(self.pidfile):
                     os.remove(self.pidfile)
             else:
-                print str(err)
+                print(str(err))
                 sys.exit(1)
 
-        if self.verbose >= 1:
-            print "Stopped"
+        self.log("Stopped")
 
     def restart(self):
         """
@@ -212,17 +214,17 @@ class Daemon(object):
         pid = self.get_pid()
 
         if pid == None:
-            print 'Process is stopped'
+            self.log('Process is stopped')
             return False
         else:
             try:
                 os.kill(pid, 0)
             except OSError as e:
                 if e.errno == errno.ESRCH:  # No such process
-                    print 'Process (pid %d) is killed' % pid
+                    self.log('Process (pid %d) is killed' % pid)
                     return False
 
-        print 'Process (pid %d) is running...' % pid
+        self.log('Process (pid %d) is running...' % pid)
         return True
 
     def run(self):
