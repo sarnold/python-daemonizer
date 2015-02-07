@@ -23,6 +23,7 @@ Changes:        23rd Jan 2009 (David Mytton <david@boxedice.com>)
 
 # Core modules
 import atexit
+import errno
 import os
 import sys
 import time
@@ -108,7 +109,16 @@ class Daemon(object):
         file(self.pidfile, 'w+').write("%s\n" % pid)
 
     def delpid(self):
-        os.remove(self.pidfile)
+        try:
+            # the process may fork itself again
+            pid = int(file(self.pidfile, 'r').read().strip())
+            if pid == os.getpid():
+                os.remove(self.pidfile)
+        except OSError as e:
+            if e.errno == errno.ENOENT:
+                pass
+            else:
+                raise
 
     def start(self, *args, **kwargs):
         """
@@ -168,7 +178,7 @@ class Daemon(object):
                 i = i + 1
                 if i % 10 == 0:
                     os.kill(pid, signal.SIGHUP)
-        except OSError, err:
+        except OSError as err:
             err = str(err)
             if err.find("No such process") > 0:
                 if os.path.exists(self.pidfile):
@@ -200,15 +210,20 @@ class Daemon(object):
 
     def is_running(self):
         pid = self.get_pid()
-        
+
         if pid == None:
             print 'Process is stopped'
-        elif os.path.exists('/proc/%d' % pid):
-            print 'Process (pid %d) is running...' % pid
+            return False
         else:
-            print 'Process (pid %d) is killed' % pid
-        
-        return pid and os.path.exists('/proc/%d' % pid)
+            try:
+                os.kill(pid, 0)
+            except OSError as e:
+                if e.errno == errno.ESRCH:  # No such process
+                    print 'Process (pid %d) is killed' % pid
+                    return False
+
+        print 'Process (pid %d) is running...' % pid
+        return True
 
     def run(self):
         """
