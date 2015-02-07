@@ -37,7 +37,7 @@ class Daemon(object):
     """
     def __init__(self, pidfile, stdin=os.devnull,
                  stdout=os.devnull, stderr=os.devnull,
-                 home_dir='.', umask=022, verbose=1):
+                 home_dir='.', umask=022, verbose=1, for_gevent=False):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -46,6 +46,7 @@ class Daemon(object):
         self.verbose = verbose
         self.umask = umask
         self.daemon_alive = True
+        self.for_gevent = for_gevent
 
     def daemonize(self):
         """
@@ -95,6 +96,14 @@ class Daemon(object):
 
         def sigtermhandler(signum, frame):
             self.daemon_alive = False
+            sys.exit()
+
+        if self.for_gevent:
+            import gevent
+            gevent.reinit()
+            gevent.signal(signal.SIGTERM, sigtermhandler, signal.SIGTERM, None)
+            gevent.signal(signal.SIGINT, sigtermhandler, signal.SIGINT, None)
+        else:
             signal.signal(signal.SIGTERM, sigtermhandler)
             signal.signal(signal.SIGINT, sigtermhandler)
 
@@ -200,14 +209,14 @@ class Daemon(object):
 
     def is_running(self):
         pid = self.get_pid()
-        
+
         if pid == None:
             print 'Process is stopped'
         elif os.path.exists('/proc/%d' % pid):
             print 'Process (pid %d) is running...' % pid
         else:
             print 'Process (pid %d) is killed' % pid
-        
+
         return pid and os.path.exists('/proc/%d' % pid)
 
     def run(self):
