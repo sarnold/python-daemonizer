@@ -39,7 +39,7 @@ class Daemon(object):
     """
     def __init__(self, pidfile, stdin=os.devnull,
                  stdout=os.devnull, stderr=os.devnull,
-                 home_dir='.', umask=022, verbose=1):
+                 home_dir='.', umask=0o22, verbose=1):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -64,7 +64,7 @@ class Daemon(object):
             if pid > 0:
                 # Exit first parent
                 sys.exit(0)
-        except OSError, e:
+        except OSError as e:
             sys.stderr.write(
                 "fork #1 failed: %d (%s)\n" % (e.errno, e.strerror))
             sys.exit(1)
@@ -80,7 +80,7 @@ class Daemon(object):
             if pid > 0:
                 # Exit from second parent
                 sys.exit(0)
-        except OSError, e:
+        except OSError as e:
             sys.stderr.write(
                 "fork #2 failed: %d (%s)\n" % (e.errno, e.strerror))
             sys.exit(1)
@@ -89,10 +89,10 @@ class Daemon(object):
             # Redirect standard file descriptors
             sys.stdout.flush()
             sys.stderr.flush()
-            si = file(self.stdin, 'r')
-            so = file(self.stdout, 'a+')
+            si = open(self.stdin, 'r')
+            so = open(self.stdout, 'a+')
             if self.stderr:
-                se = file(self.stderr, 'a+', 0)
+                se = open(self.stderr, 'a+', 0)
             else:
                 se = so
             os.dup2(si.fileno(), sys.stdin.fileno())
@@ -110,12 +110,12 @@ class Daemon(object):
         atexit.register(
             self.delpid)  # Make sure pid file is removed if we quit
         pid = str(os.getpid())
-        file(self.pidfile, 'w+').write("%s\n" % pid)
+        open(self.pidfile, 'w+').write("%s\n" % pid)
 
     def delpid(self):
         try:
             # the process may fork itself again
-            pid = int(file(self.pidfile, 'r').read().strip())
+            pid = int(open(self.pidfile, 'r').read().strip())
             if pid == os.getpid():
                 os.remove(self.pidfile)
         except OSError as e:
@@ -133,7 +133,7 @@ class Daemon(object):
 
         # Check for a pidfile to see if the daemon already runs
         try:
-            pf = file(self.pidfile, 'r')
+            pf = open(self.pidfile, 'r')
             pid = int(pf.read().strip())
             pf.close()
         except IOError:
@@ -201,7 +201,7 @@ class Daemon(object):
 
     def get_pid(self):
         try:
-            pf = file(self.pidfile, 'r')
+            pf = open(self.pidfile, 'r')
             pid = int(pf.read().strip())
             pf.close()
         except IOError:
@@ -213,7 +213,7 @@ class Daemon(object):
     def is_running(self):
         pid = self.get_pid()
 
-        if pid == None:
+        if pid is None:
             self.log('Process is stopped')
             return False
         else:
