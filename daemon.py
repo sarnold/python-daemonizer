@@ -182,7 +182,6 @@ class Daemon(object):
                 if i % 10 == 0:
                     os.kill(pid, signal.SIGHUP)
         except OSError as err:
-            err = str(err)
             if err.errno == errno.ESRCH:
                 if os.path.exists(self.pidfile):
                     os.remove(self.pidfile)
