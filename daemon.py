@@ -95,8 +95,9 @@ class Daemon(object):
 
         def sigtermhandler(signum, frame):
             self.daemon_alive = False
-            signal.signal(signal.SIGTERM, sigtermhandler)
-            signal.signal(signal.SIGINT, sigtermhandler)
+
+        signal.signal(signal.SIGTERM, sigtermhandler)
+        signal.signal(signal.SIGINT, sigtermhandler)
 
         if self.verbose >= 1:
             print "Started"
@@ -200,14 +201,14 @@ class Daemon(object):
 
     def is_running(self):
         pid = self.get_pid()
-        
-        if pid == None:
+
+        if pid is None:
             print 'Process is stopped'
         elif os.path.exists('/proc/%d' % pid):
             print 'Process (pid %d) is running...' % pid
         else:
             print 'Process (pid %d) is killed' % pid
-        
+
         return pid and os.path.exists('/proc/%d' % pid)
 
     def run(self):
