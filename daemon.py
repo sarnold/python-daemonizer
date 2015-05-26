@@ -39,7 +39,7 @@ class Daemon(object):
     """
     def __init__(self, pidfile, stdin=os.devnull,
                  stdout=os.devnull, stderr=os.devnull,
-                 home_dir='.', umask=0o22, verbose=1):
+                 home_dir='.', umask=0o22, verbose=1, use_gevent=False):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -48,6 +48,7 @@ class Daemon(object):
         self.verbose = verbose
         self.umask = umask
         self.daemon_alive = True
+        self.use_gevent = use_gevent
 
     def log(self, *args):
         if self.verbose >= 1:
@@ -101,6 +102,14 @@ class Daemon(object):
 
         def sigtermhandler(signum, frame):
             self.daemon_alive = False
+            sys.exit()
+
+        if self.use_gevent:
+            import gevent
+            gevent.reinit()
+            gevent.signal(signal.SIGTERM, sigtermhandler, signal.SIGTERM, None)
+            gevent.signal(signal.SIGINT, sigtermhandler, signal.SIGINT, None)
+        else:
             signal.signal(signal.SIGTERM, sigtermhandler)
             signal.signal(signal.SIGINT, sigtermhandler)
 
