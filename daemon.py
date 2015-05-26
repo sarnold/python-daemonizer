@@ -37,7 +37,7 @@ class Daemon(object):
     """
     def __init__(self, pidfile, stdin=os.devnull,
                  stdout=os.devnull, stderr=os.devnull,
-                 home_dir='.', umask=022, verbose=1, for_gevent=False):
+                 home_dir='.', umask=022, verbose=1, use_gevent=False):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -46,7 +46,7 @@ class Daemon(object):
         self.verbose = verbose
         self.umask = umask
         self.daemon_alive = True
-        self.for_gevent = for_gevent
+        self.use_gevent = use_gevent
 
     def daemonize(self):
         """
@@ -98,7 +98,7 @@ class Daemon(object):
             self.daemon_alive = False
             sys.exit()
 
-        if self.for_gevent:
+        if self.use_gevent:
             import gevent
             gevent.reinit()
             gevent.signal(signal.SIGTERM, sigtermhandler, signal.SIGTERM, None)
