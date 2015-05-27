@@ -210,7 +210,7 @@ class Daemon(object):
     def is_running(self):
         pid = self.get_pid()
 
-        if pid == None:
+        if pid is None:
             print 'Process is stopped'
         elif os.path.exists('/proc/%d' % pid):
             print 'Process (pid %d) is running...' % pid
