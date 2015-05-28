@@ -93,7 +93,11 @@ class Daemon(object):
             si = open(self.stdin, 'r')
             so = open(self.stdout, 'a+')
             if self.stderr:
-                se = open(self.stderr, 'a+', 0)
+                try:
+                    se = open(self.stderr, 'a+', 0)
+                except ValueError:
+                    # Python 3 can't have unbuffered text I/O
+                    se = open(self.stderr, 'a+', 1)
             else:
                 se = so
             os.dup2(si.fileno(), sys.stdin.fileno())
