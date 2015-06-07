@@ -39,7 +39,8 @@ class Daemon(object):
     """
     def __init__(self, pidfile, stdin=os.devnull,
                  stdout=os.devnull, stderr=os.devnull,
-                 home_dir='.', umask=0o22, verbose=1, use_gevent=False):
+                 home_dir='.', umask=0o22, verbose=1,
+                 use_gevent=False, use_eventlet=False):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -49,6 +50,7 @@ class Daemon(object):
         self.umask = umask
         self.daemon_alive = True
         self.use_gevent = use_gevent
+        self.use_eventlet = use_eventlet
 
     def log(self, *args):
         if self.verbose >= 1:
@@ -60,6 +62,9 @@ class Daemon(object):
         Programming in the UNIX Environment" for details (ISBN 0201563177)
         http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16
         """
+        if self.use_eventlet:
+            import eventlet.tpool
+            eventlet.tpool.killall()
         try:
             pid = os.fork()
             if pid > 0:
