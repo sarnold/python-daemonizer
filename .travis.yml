@@ -21,4 +21,4 @@ script:
 
 notifications:
   slack:
-    secure: N7WQuQNLn4wJqGHnLmTOZL18NGdr7vKNyHSV0TnXcgijnoqt+yxOq7mEu+h/KLgflAQObyKF8A3ChmbTB99xL6fR8xYVvxLSPk7+g9PU6Vf7absN9yY0rUQfXcPLVyYsZ11R1UqkizYbxc9B2A588S48/TMP2KB6LnII+PNajyg=
+    secure: "V9Q1oHrnGwDnQvse0GEmwz4mvihwQYhTLjF2acOqmeC1POkZo18mxqkyjwWFHNr6GxGdUHjjS319tVB6S/MxMJNVo/0cmmSLKkITWBp7alJ6tGTHi4H0UpwWlYGNHVhzlgP4IB1QV2P7AWxr6VlxNHM6GOQJ7oZx3WdsYZfu02c="
