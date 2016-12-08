@@ -234,7 +234,7 @@ class Daemon(object):
             self.log('Process is stopped')
             return False
         elif os.path.exists('/proc/%d' % pid):
-            self.log('Process (pid %d) is running...' % pid
+            self.log('Process (pid %d) is running...' % pid)
             return True
         else:
             self.log('Process (pid %d) is killed' % pid)
