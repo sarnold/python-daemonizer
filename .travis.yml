@@ -16,7 +16,10 @@ matrix:
       language: generic
       python:
 
+install: "pip install flake8"
+
 script:
+  - flake8 *.py
   - python ./test_daemon.py
 
 notifications:
