@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/serverdensity/python-daemon.svg?branch=master)](https://travis-ci.org/serverdensity/python-daemon)
+
 Python daemonizer class
 ====================
 
