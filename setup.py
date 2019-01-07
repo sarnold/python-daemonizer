@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-__version__ = '0.0.1'
+__version__ = '0.1.2'
 
 try:
     from setuptools import setup
@@ -9,6 +9,7 @@ except ImportError:
 
 setup(
     name="python-daemon",
+    packages=['daemon'],
     version=__version__,
     author="Server Density",
     license="http://creativecommons.org/licenses/by-sa/3.0/",
