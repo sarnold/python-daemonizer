@@ -28,7 +28,26 @@ import errno
 import os
 import sys
 import time
+import datetime
 import signal
+import logging
+
+try:
+    from datetime import timezone
+    utc = timezone.utc
+except ImportError:
+    from schedule.timezone import UTC
+    utc = UTC()
+
+
+logger = logging.getLogger('daemon')
+utc_stamp = datetime.datetime.now(utc)
+
+
+def timestamp():
+    # sys.stdout.write('='*80)
+    sys.stdout.write('\nTIMESTAMP: ')
+    sys.stdout.write('{:%Y-%m-%d %H:%M:%S %Z}\n'.format(utc_stamp))
 
 
 class Daemon(object):
@@ -122,7 +141,11 @@ class Daemon(object):
             signal.signal(signal.SIGTERM, sigtermhandler)
             signal.signal(signal.SIGINT, sigtermhandler)
 
-        self.log("Started")
+        if self.verbose:
+            timestamp()
+            self.log("Started")
+        else:
+            logger.info('Started')
 
         # Write pidfile
         atexit.register(
@@ -147,7 +170,11 @@ class Daemon(object):
         Start the daemon
         """
 
-        self.log("Starting...")
+        if self.verbose:
+            timestamp()
+            self.log("Starting...")
+        else:
+            logger.info('Starting...')
 
         # Check for a pidfile to see if the daemon already runs
         try:
@@ -174,7 +201,10 @@ class Daemon(object):
         """
 
         if self.verbose >= 1:
+            timestamp()
             self.log("Stopping...")
+        else:
+            logger.info('Stopping...')
 
         # Get the pid from the pidfile
         pid = self.get_pid()
@@ -231,12 +261,15 @@ class Daemon(object):
         pid = self.get_pid()
 
         if pid is None:
+            timestamp()
             self.log('Process is stopped')
             return False
         elif os.path.exists('/proc/%d' % pid):
+            timestamp()
             self.log('Process (pid %d) is running...' % pid)
             return True
         else:
+            timestamp()
             self.log('Process (pid %d) is killed' % pid)
             return False
 

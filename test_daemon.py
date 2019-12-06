@@ -4,6 +4,10 @@ import time
 import unittest
 
 from daemon import Daemon
+from daemon.parent_logger import setup_logging
+
+# set log level
+debug = False
 
 
 class TDaemon(Daemon):
@@ -69,6 +73,7 @@ class TestDaemon(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    setup_logging(debug, '/tmp/test_daemon.log')
     if len(sys.argv) == 1:
         unittest.main()
     elif len(sys.argv) == 2:
