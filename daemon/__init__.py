@@ -36,7 +36,7 @@ try:
     from datetime import timezone
     utc = timezone.utc
 except ImportError:
-    from schedule.timezone import UTC
+    from daemon.timezone import UTC
     utc = UTC()
 
 
