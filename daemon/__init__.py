@@ -39,6 +39,8 @@ except ImportError:
     from daemon.timezone import UTC
     utc = UTC()
 
+from daemon import settings as s
+
 
 logger = logging.getLogger('daemon')
 utc_stamp = datetime.datetime.now(utc)
@@ -56,9 +58,9 @@ class Daemon(object):
 
     Usage: subclass the Daemon class and override the run() method
     """
-    def __init__(self, pidfile, stdin=os.devnull,
+    def __init__(self, pidfile=s.PIDFILE, stdin=os.devnull,
                  stdout=os.devnull, stderr=os.devnull,
-                 home_dir='.', umask=0o22, verbose=1,
+                 home_dir=s.HOMEDIR, umask=0o22, verbose=1,
                  use_gevent=False, use_eventlet=False):
         self.stdin = stdin
         self.stdout = stdout
@@ -74,6 +76,7 @@ class Daemon(object):
     def log(self, *args):
         if self.verbose >= 1:
             print(*args)
+            logger.debug('My PID file is: %s' % (self.pidfile))
 
     def daemonize(self):
         """
@@ -261,16 +264,13 @@ class Daemon(object):
         pid = self.get_pid()
 
         if pid is None:
-            timestamp()
-            self.log('Process is stopped')
+            logger.debug('Process is stopped')
             return False
         elif os.path.exists('/proc/%d' % pid):
-            timestamp()
-            self.log('Process (pid %d) is running...' % pid)
+            logger.debug('Process (pid %d) is running...' % pid)
             return True
         else:
-            timestamp()
-            self.log('Process (pid %d) is killed' % pid)
+            logger.debug('Process (pid %d) is killed' % pid)
             return False
 
     def run(self):
