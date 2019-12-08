@@ -1,5 +1,5 @@
 DEBUG = True
 
 HOMEDIR = './'
-LOGFILE = 'tesing_daemon.log'
+LOGFILE = 'testing_daemon.log'
 PIDFILE = 'testing_daemon.pid'

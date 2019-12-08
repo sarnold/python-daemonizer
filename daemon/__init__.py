@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 ***
 Modified generic daemon class
@@ -39,10 +40,8 @@ except ImportError:
     from daemon.timezone import UTC
     utc = UTC()
 
-from daemon import settings as s
 
-
-logger = logging.getLogger('daemon')
+logger = logging.getLogger(__name__)
 utc_stamp = datetime.datetime.now(utc)
 
 
@@ -58,9 +57,9 @@ class Daemon(object):
 
     Usage: subclass the Daemon class and override the run() method
     """
-    def __init__(self, pidfile=s.PIDFILE, stdin=os.devnull,
+    def __init__(self, pidfile, stdin=os.devnull,
                  stdout=os.devnull, stderr=os.devnull,
-                 home_dir=s.HOMEDIR, umask=0o22, verbose=1,
+                 home_dir='.', umask=0o22, verbose=1,
                  use_gevent=False, use_eventlet=False):
         self.stdin = stdin
         self.stdout = stdout

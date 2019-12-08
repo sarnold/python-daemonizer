@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
 import os
 import sys
 import time
 import unittest
 
 from daemon import Daemon
-from daemon import settings as s
+
+import settings as s
 from daemon.parent_logger import setup_logging
 
 
