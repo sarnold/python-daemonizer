@@ -6,7 +6,7 @@ import unittest
 
 from daemon import Daemon
 
-import settings as s
+import test.settings as s
 from daemon.parent_logger import setup_logging
 
 
