@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-__version__ = '0.1.2'
+__version__ = '0.2.0'
 
 try:
     from setuptools import setup
@@ -13,7 +13,7 @@ setup(
     version=__version__,
     author="Server Density",
     license="http://creativecommons.org/licenses/by-sa/3.0/",
-    url="https://github.com/serverdensity/python-daemon",
+    url="https://github.com/sarnold/python-daemon",
     description="Python daemonizer for Unix, Linux and OS X",
     platforms=["any"],
     classifiers=[
