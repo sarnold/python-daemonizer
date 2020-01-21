@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/serverdensity/python-daemon.svg?branch=master)](https://travis-ci.org/serverdensity/python-daemon)
+[![Build Status](https://travis-ci.org/freepn/python-daemon.svg?branch=master)](https://travis-ci.org/freepn/python-daemon)
 
 Python daemonizer class
 ====================

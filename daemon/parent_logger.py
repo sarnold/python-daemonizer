@@ -16,8 +16,14 @@ def setup_logging(debug, filename):
     else:
         log_level = logging.getLevelName('INFO')
 
+    # process format:
+    #   '%(asctime)s %(name)s[%(process)d] %(levelname)s - %(message)s'
+    # alt format
+    #   '%(asctime)s %(levelname)s %(filename)s(%(lineno)d) %(message)s'
+    # long format
+    #   '%(asctime)s %(name)s.%(funcName)s +%(lineno)s: %(levelname)s [%(process)d] %(message)s'
     logging.basicConfig(level=log_level,
-                        format="%(asctime)s %(name)s[%(process)d] %(levelname)s - %(message)s",
+                        format='%(asctime)s %(levelname)s %(filename)s(%(lineno)d) %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S UTC',
                         filename=filename)
 
