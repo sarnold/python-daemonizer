@@ -33,14 +33,8 @@ import datetime
 import signal
 import logging
 
-try:
-    from datetime import timezone
-    utc = timezone.utc
-except ImportError:
-    from daemon.timezone import UTC
-    utc = UTC()
 
-
+utc = datetime.timezone.utc
 logger = logging.getLogger(__name__)
 utc_stamp = datetime.datetime.now(utc)
 
@@ -60,7 +54,8 @@ class Daemon(object):
     def __init__(self, pidfile, stdin=os.devnull,
                  stdout=os.devnull, stderr=os.devnull,
                  home_dir='.', umask=0o22, verbose=1,
-                 use_gevent=False, use_eventlet=False):
+                 use_gevent=False, use_eventlet=False,
+                 use_cleanup=False):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -71,6 +66,7 @@ class Daemon(object):
         self.daemon_alive = True
         self.use_gevent = use_gevent
         self.use_eventlet = use_eventlet
+        self.use_cleanup = use_cleanup
 
     def log(self, *args):
         if self.verbose >= 1:
@@ -131,6 +127,8 @@ class Daemon(object):
             os.dup2(se.fileno(), sys.stderr.fileno())
 
         def sigtermhandler(signum, frame):
+            if self.use_cleanup:
+                self.cleanup()
             self.daemon_alive = False
             sys.exit()
 
@@ -247,6 +245,16 @@ class Daemon(object):
         """
         self.stop()
         self.start()
+
+    def cleanup(self):
+        """
+        You should override this method if you need cleanup handlers on
+        shutdwon (ie, prior to sigterm handling) and set use_cleanup to
+        ``True`` when you subclass daemon().
+        """
+        logger.debug('cleanup() handler invoked')
+        sys.stdout.write('cleanup() handler invoked')
+        pass
 
     def get_pid(self):
         try:

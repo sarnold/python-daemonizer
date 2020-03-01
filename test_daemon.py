@@ -21,6 +21,11 @@ class TDaemon(Daemon):
         testoutput.write('inited')
         testoutput.close()
 
+    def cleanup(self):
+        testoutput = open('testing_daemon', 'w')
+        testoutput.write('cleanup')
+        testoutput.close()
+
     def run(self):
         time.sleep(0.3)
         testoutput = open('testing_daemon', 'w')
@@ -74,6 +79,7 @@ class TestDaemon(unittest.TestCase):
             control_daemon('stop')
         time.sleep(0.05)
         os.system('rm testing_daemon*')
+        # os.system('rm testing_cleanup*')
 
 
 if __name__ == '__main__':
@@ -83,5 +89,5 @@ if __name__ == '__main__':
     elif len(sys.argv) == 2:
         arg = sys.argv[1]
         if arg in ('start', 'stop', 'restart'):
-            d = TDaemon(s.PIDFILE, verbose=1)
+            d = TDaemon(s.PIDFILE, verbose=1, use_cleanup=True)
             getattr(d, arg)()
