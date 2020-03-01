@@ -16,6 +16,7 @@ setup(
     url="https://github.com/sarnold/python-daemon",
     description="Python daemonizer for Unix, Linux and OS X",
     platforms=["any"],
+    test_suite='daemon',
     classifiers=[
         "License :: OSI Approved :: Attribution Assurance License",
         'Intended Audience :: Developers',
