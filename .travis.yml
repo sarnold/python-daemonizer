@@ -27,7 +27,7 @@ before_install:
     - date
 
 script:
-    - py.test --capture=fd -v test_daemon.py --flake8 daemon/ --cov=daemon --cov-report term-missing
+    - tox
 
 notifications:
   irc:
