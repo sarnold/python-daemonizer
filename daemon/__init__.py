@@ -34,7 +34,14 @@ import signal
 import logging
 
 
-utc = datetime.timezone.utc
+try:
+    from datetime import timezone
+    utc = timezone.utc  # pragma: PY3
+except ImportError:  # pragma: PY2
+    from daemon.timezone import UTC
+    utc = UTC()
+
+
 logger = logging.getLogger(__name__)
 utc_stamp = datetime.datetime.now(utc)
 
@@ -71,7 +78,6 @@ class Daemon(object):
     def log(self, *args):
         if self.verbose >= 1:
             print(*args)
-            logger.debug('My PID file is: %s' % (self.pidfile))
 
     def daemonize(self):
         """
@@ -203,6 +209,9 @@ class Daemon(object):
         if not self.is_running():
             message = "pidfile %s does not exist. Not running?\n"
             sys.stderr.write(message % self.pidfile)
+        else:
+            message = "pidfile %s found, daemon PID is %d\n"
+            sys.stdout.write(message % (self.pidfile, self.get_pid()))
 
         if self.verbose >= 1:
             timestamp()
@@ -267,9 +276,7 @@ class Daemon(object):
         shutdwon (ie, prior to sigterm handling) and set use_cleanup to
         ``True`` when you subclass daemon().
         """
-        logger.debug('cleanup() handler invoked')
-        sys.stdout.write('cleanup() handler invoked')
-        pass
+        raise NotImplementedError
 
     def get_pid(self):
         try:

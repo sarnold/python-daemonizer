@@ -4,9 +4,9 @@ import sys
 import time
 import unittest
 
-from daemon import Daemon
-
 import test.settings as s
+
+from daemon import Daemon
 from daemon.parent_logger import setup_logging
 
 
@@ -48,14 +48,12 @@ class TestDaemon(unittest.TestCase):
     def test_daemon_can_start(self):
         assert os.path.exists(s.PIDFILE)
         assert self.testoutput.read() == 'inited'
-        control_daemon('status')
 
     def test_daemon_can_stop(self):
         control_daemon('stop')
-        time.sleep(0.1)
+        time.sleep(0.11)
         assert os.path.exists(s.PIDFILE) is False
         assert self.testoutput.read() == 'cleanup'
-        control_daemon('status')
 
     def test_daemon_can_finish(self):
         time.sleep(0.6)
@@ -75,13 +73,23 @@ class TestDaemon(unittest.TestCase):
         pidfile.close()
         assert pid1 != pid2
 
+    # unittest+pytest makes these difficult to get output for assertions
+    # although correct output can be seen with --capture=no
+    def test_daemon_status_false(self):
+        control_daemon('stop')
+        time.sleep(0.1)
+        control_daemon('status')
+
+    def test_daemon_status_true(self):
+        assert os.path.exists(s.PIDFILE)
+        control_daemon('status')
+
     def tearDown(self):
         self.testoutput.close()
         if os.path.exists(s.PIDFILE):
             control_daemon('stop')
         time.sleep(0.05)
         os.system('rm testing_daemon*')
-        # os.system('rm testing_cleanup*')
 
 
 if __name__ == '__main__':
