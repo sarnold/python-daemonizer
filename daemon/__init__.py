@@ -195,6 +195,21 @@ class Daemon(object):
         self.daemonize()
         self.run(*args, **kwargs)
 
+    def status(self):
+        """
+        Get status from the daemon
+        """
+
+        if not self.is_running():
+            message = "pidfile %s does not exist. Not running?\n"
+            sys.stderr.write(message % self.pidfile)
+
+        if self.verbose >= 1:
+            timestamp()
+            self.log("{} status is: {}".format(__name__, self.is_running()))
+
+        return self.is_running()
+
     def stop(self):
         """
         Stop the daemon

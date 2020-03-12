@@ -48,12 +48,14 @@ class TestDaemon(unittest.TestCase):
     def test_daemon_can_start(self):
         assert os.path.exists(s.PIDFILE)
         assert self.testoutput.read() == 'inited'
+        control_daemon('status')
 
     def test_daemon_can_stop(self):
         control_daemon('stop')
         time.sleep(0.1)
         assert os.path.exists(s.PIDFILE) is False
         assert self.testoutput.read() == 'cleanup'
+        control_daemon('status')
 
     def test_daemon_can_finish(self):
         time.sleep(0.6)
@@ -88,6 +90,6 @@ if __name__ == '__main__':
         unittest.main()
     elif len(sys.argv) == 2:
         arg = sys.argv[1]
-        if arg in ('start', 'stop', 'restart'):
+        if arg in ('start', 'stop', 'restart', 'status'):
             d = TDaemon(s.PIDFILE, verbose=1, use_cleanup=True)
             getattr(d, arg)()
