@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 
 try:
     from setuptools import setup
@@ -25,6 +25,7 @@ setup(
         'Operating System :: Unix',
         'Operating System :: POSIX :: Linux',
         'Operating System :: MacOS :: MacOS X',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
