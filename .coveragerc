@@ -2,3 +2,5 @@
 [run]
 #branch = True
 omit = test_daemon.py test/*
+plugins =
+    coverage_python_version
