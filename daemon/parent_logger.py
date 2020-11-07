@@ -1,4 +1,7 @@
 # coding: utf-8
+"""
+Configure logging helper function with correct UTC name.
+"""
 
 import time
 import logging

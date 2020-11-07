@@ -15,13 +15,15 @@ matrix:
   fast_finish: true
   include:
     - os: osx
-      language: generic
-      python:
+      language: shell
+      install:
+        - pip3 install --upgrade pip
+        - pip3 install pytest
+      script: pytest -v test_daemon.py
   allow_failures:
-    - python: "3.8-dev"
     - python: "nightly"
 
-install: pip install tox-travis coveralls
+install: pip install tox-travis codecov
 
 before_install:
     - export TZ=America/Los_Angeles

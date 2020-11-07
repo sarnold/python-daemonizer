@@ -47,6 +47,9 @@ utc_stamp = datetime.datetime.now(utc)
 
 
 def timestamp():
+    """
+    Make a UTC timestamp.
+    """
     # sys.stdout.write('='*80)
     sys.stdout.write('\nTIMESTAMP: ')
     sys.stdout.write('{:%Y-%m-%d %H:%M:%S %Z}\n'.format(utc_stamp))
@@ -295,12 +298,11 @@ class Daemon(object):
         if pid is None:
             logger.debug('Process is stopped')
             return False
-        elif os.path.exists('/proc/%d' % pid):
+        if os.path.exists('/proc/%d' % pid):
             logger.debug('Process (pid %d) is running...' % pid)
             return True
-        else:
-            logger.debug('Process (pid %d) is killed' % pid)
-            return False
+        logger.debug('Process (pid %d) is killed' % pid)
+        return False
 
     def run(self):
         """
