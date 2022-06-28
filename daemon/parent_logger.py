@@ -25,10 +25,12 @@ def setup_logging(debug, filename):
     #   '%(asctime)s %(levelname)s %(filename)s(%(lineno)d) %(message)s'
     # long format
     #   '%(asctime)s %(name)s.%(funcName)s +%(lineno)s: %(levelname)s [%(process)d] %(message)s'
-    logging.basicConfig(level=log_level,
-                        format='%(asctime)s %(levelname)s %(filename)s(%(lineno)d) %(message)s',
-                        datefmt='%Y-%m-%d %H:%M:%S UTC',
-                        filename=filename)
+    logging.basicConfig(
+        level=log_level,
+        format='%(asctime)s %(levelname)s %(filename)s(%(lineno)d) %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S UTC',
+        filename=filename,
+    )
 
     # BUG: This does not print the TZ name because logging module uses
     #      time instead of tz-aware datetime objects (so we force the

@@ -36,24 +36,19 @@ import signal
 import sys
 import time
 
-try:
-    from datetime import timezone
-    utc = timezone.utc  # pragma: PY3
-except ImportError:  # pragma: PY2
-    from daemon.timezone import UTC
-    utc = UTC()  # type: ignore
+from datetime import timezone
 
 from ._version import __version__
 
+
 logger = logging.getLogger(__name__)
-utc_stamp = datetime.datetime.now(utc)
+utc_stamp = datetime.datetime.now(timezone.utc)
 
 
 def timestamp():
     """
     Make a UTC timestamp.
     """
-    # sys.stdout.write('='*80)
     sys.stdout.write(f'\nTIMESTAMP v{__version__}: ')
     sys.stdout.write('{:%Y-%m-%d %H:%M:%S %Z}\n'.format(utc_stamp))
 
