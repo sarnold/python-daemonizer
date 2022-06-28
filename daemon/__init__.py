@@ -18,8 +18,10 @@ Changes:        23rd Jan 2009 (David Mytton <david@boxedice.com>)
                 11th Mar 2009 (David Mytton <david@boxedice.com>)
                 - Fixed problem with daemon exiting on Python 2.4
                   (before SystemExit was part of the Exception base)
-                13th Aug 2010 (David Mytton <david@boxedice.com>
+                13th Aug 2010 (David Mytton <david@boxedice.com>)
                 - Fixed unhandled exception if PID file is empty
+                12th Mar 2020 (Stephen Arnold <nerdboy@gentoo.org>)
+                - add status arg, utc timestamp/logging helpers, tag 0.2.3
 '''
 
 # Core modules
@@ -138,6 +140,7 @@ class Daemon(object):
         def sigtermhandler(signum, frame):
             if self.use_cleanup:
                 self.cleanup()
+                time.sleep(0.1)
             self.daemon_alive = False
             sys.exit()
 
@@ -160,12 +163,12 @@ class Daemon(object):
         atexit.register(
             self.delpid)  # Make sure pid file is removed if we quit
         pid = str(os.getpid())
-        open(self.pidfile, 'w+').write("%s\n" % pid)
+        open(self.pidfile, 'w+', encoding='utf-8').write("%s\n" % pid)
 
     def delpid(self):
         try:
             # the process may fork itself again
-            pid = int(open(self.pidfile, 'r').read().strip())
+            pid = int(open(self.pidfile, 'r', encoding='utf-8').read().strip())
             if pid == os.getpid():
                 os.remove(self.pidfile)
         except OSError as e:
@@ -187,9 +190,9 @@ class Daemon(object):
 
         # Check for a pidfile to see if the daemon already runs
         try:
-            pf = open(self.pidfile, 'r')
-            pid = int(pf.read().strip())
-            pf.close()
+            pfile = open(self.pidfile, 'r', encoding='utf-8')
+            pid = int(pfile.read().strip())
+            pfile.close()
         except IOError:
             pid = None
         except SystemExit:
@@ -283,9 +286,9 @@ class Daemon(object):
 
     def get_pid(self):
         try:
-            pf = open(self.pidfile, 'r')
-            pid = int(pf.read().strip())
-            pf.close()
+            pfile = open(self.pidfile, 'r', encoding='utf-8')
+            pid = int(pfile.read().strip())
+            pfile.close()
         except IOError:
             pid = None
         except SystemExit:
@@ -298,10 +301,10 @@ class Daemon(object):
         if pid is None:
             logger.debug('Process is stopped')
             return False
-        if os.path.exists('/proc/%d' % pid):
-            logger.debug('Process (pid %d) is running...' % pid)
+        if os.path.exists(f'/proc/{pid}'):
+            logger.debug('Process (pid %d) is running...', pid)
             return True
-        logger.debug('Process (pid %d) is killed' % pid)
+        logger.debug('Process (pid %d) is killed', pid)
         return False
 
     def run(self):

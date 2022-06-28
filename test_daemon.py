@@ -27,7 +27,7 @@ class TDaemon(Daemon):
         testoutput.close()
 
     def run(self):
-        time.sleep(0.4)
+        time.sleep(0.5)
         testoutput = open('testing_daemon', 'w')
         testoutput.write('finished')
         testoutput.close()
@@ -51,9 +51,9 @@ class TestDaemon(unittest.TestCase):
 
     def test_daemon_can_stop(self):
         control_daemon('stop')
-        time.sleep(0.11)
-        assert os.path.exists(s.PIDFILE) is False
+        time.sleep(0.4)
         assert self.testoutput.read() == 'cleanup'
+        assert os.path.exists(s.PIDFILE) is False
 
     def test_daemon_can_finish(self):
         time.sleep(0.6)
