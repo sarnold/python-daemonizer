@@ -26,23 +26,24 @@ Changes:        23rd Jan 2009 (David Mytton <david@boxedice.com>)
 
 # Core modules
 from __future__ import print_function
+
 import atexit
+import datetime
 import errno
+import logging
 import os
+import signal
 import sys
 import time
-import datetime
-import signal
-import logging
-
 
 try:
     from datetime import timezone
     utc = timezone.utc  # pragma: PY3
 except ImportError:  # pragma: PY2
     from daemon.timezone import UTC
-    utc = UTC()
+    utc = UTC()  # type: ignore
 
+from ._version import __version__
 
 logger = logging.getLogger(__name__)
 utc_stamp = datetime.datetime.now(utc)
@@ -53,11 +54,11 @@ def timestamp():
     Make a UTC timestamp.
     """
     # sys.stdout.write('='*80)
-    sys.stdout.write('\nTIMESTAMP: ')
+    sys.stdout.write(f'\nTIMESTAMP v{__version__}: ')
     sys.stdout.write('{:%Y-%m-%d %H:%M:%S %Z}\n'.format(utc_stamp))
 
 
-class Daemon(object):
+class Daemon():
     """
     A generic daemon class.
 
@@ -137,7 +138,7 @@ class Daemon(object):
             os.dup2(so.fileno(), sys.stdout.fileno())
             os.dup2(se.fileno(), sys.stderr.fileno())
 
-        def sigtermhandler(signum, frame):
+        def sigtermhandler(signum, frame):  # pylint: disable=W0613
             if self.use_cleanup:
                 self.cleanup()
                 time.sleep(0.1)
@@ -147,8 +148,8 @@ class Daemon(object):
         if self.use_gevent:
             import gevent
             gevent.reinit()
-            gevent.signal(signal.SIGTERM, sigtermhandler, signal.SIGTERM, None)
-            gevent.signal(signal.SIGINT, sigtermhandler, signal.SIGINT, None)
+            gevent.signal_handler(signal.SIGTERM, sigtermhandler, signal.SIGTERM, None)
+            gevent.signal_handler(signal.SIGINT, sigtermhandler, signal.SIGINT, None)
         else:
             signal.signal(signal.SIGTERM, sigtermhandler)
             signal.signal(signal.SIGINT, sigtermhandler)
@@ -163,9 +164,12 @@ class Daemon(object):
         atexit.register(
             self.delpid)  # Make sure pid file is removed if we quit
         pid = str(os.getpid())
-        open(self.pidfile, 'w+', encoding='utf-8').write("%s\n" % pid)
+        open(self.pidfile, 'w+', encoding='utf-8').write(f"{pid}\n")
 
     def delpid(self):
+        """
+        Remove PID file if they are us.
+        """
         try:
             # the process may fork itself again
             pid = int(open(self.pidfile, 'r', encoding='utf-8').read().strip())
@@ -221,7 +225,7 @@ class Daemon(object):
 
         if self.verbose >= 1:
             timestamp()
-            self.log("{} status is: {}".format(__name__, self.is_running()))
+            self.log(f"{__name__} status is: {self.is_running()}")
 
         return self.is_running()
 
@@ -285,6 +289,12 @@ class Daemon(object):
         raise NotImplementedError
 
     def get_pid(self):
+        """
+        Get process ID.
+
+        :return pid: daemon process ID
+        :rtype int:
+        """
         try:
             pfile = open(self.pidfile, 'r', encoding='utf-8')
             pid = int(pfile.read().strip())
@@ -296,6 +306,11 @@ class Daemon(object):
         return pid
 
     def is_running(self):
+        """
+        Check whether the server is running.
+
+        :return: True if running, else False
+        """
         pid = self.get_pid()
 
         if pid is None:

@@ -3,8 +3,8 @@
 Configure logging helper function with correct UTC name.
 """
 
-import time
 import logging
+import time
 
 
 def setup_logging(debug, filename):
