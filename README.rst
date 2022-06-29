@@ -26,19 +26,24 @@ Usage
 Define a class which inherits from ``Daemon`` and has a ``run()`` method
 (which is what will be called once the daemonization is completed.
 
-.. code-block::
+.. code-block:: python
 
   from daemon import Daemon
 
+
   class pantalaimon(Daemon):
       def run(self):
-          # Do stuff
+          do_mything()
+
 
 Create a new object of your class, specifying where you want your PID
-file to exist::
+file to exist:
 
-  pineMarten = pantalaimon('/path/to/pid.pid')
+.. code-block:: python
+
+  pineMarten = pantalaimon("/path/to/pid.pid")
   pineMarten.start()
+
 
 Actions
 -------
