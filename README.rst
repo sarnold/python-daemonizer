@@ -2,9 +2,9 @@
  Python Daemonizer Class
 =========================
 
-|ci| |wheels| |release| |badge|
+|ci| |wheels| |release| |badge| |coverage|
 
-|pre| |pylint|
+|pre| |cov| |pylint|
 
 |tag| |license| |python|
 
@@ -26,19 +26,24 @@ Usage
 Define a class which inherits from ``Daemon`` and has a ``run()`` method
 (which is what will be called once the daemonization is completed.
 
-.. code-block::
+.. code-block:: python
 
   from daemon import Daemon
 
+
   class pantalaimon(Daemon):
       def run(self):
-          # Do stuff
+          do_mything()
+
 
 Create a new object of your class, specifying where you want your PID
-file to exist::
+file to exist:
 
-  pineMarten = pantalaimon('/path/to/pid.pid')
+.. code-block:: python
+
+  pineMarten = pantalaimon("/path/to/pid.pid")
   pineMarten.start()
+
 
 Actions
 -------
@@ -173,6 +178,10 @@ To run all ``pre-commit`` checks manually, try::
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/wheels.yml
     :alt: Wheel Status
 
+.. |coverage| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/coverage.yml/badge.svg
+    :target: https://github.com/sarnold/python-daemonizer/actions/workflows/coverage.yml
+    :alt: Coverage workflow
+
 .. |badge| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml/badge.svg
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml
     :alt: Pylint Status
@@ -180,6 +189,10 @@ To run all ``pre-commit`` checks manually, try::
 .. |release| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml/badge.svg
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml
     :alt: Release Status
+
+.. |cov| image:: https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/test-coverage.svg
+    :target: https://github.com/sarnold/python-daemonizer/
+    :alt: Test coverage
 
 .. |pylint| image:: https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/pylint-score.svg
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml
