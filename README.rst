@@ -73,14 +73,35 @@ Install with pip
 ----------------
 
 This updated version is *not* published on PyPI, thus use one of the
-following commands to install the latest pyserv in a Python virtual
-environment on any platform.
+following commands to install the latest python-daemonizer in a Python
+virtual environment on any platform.
 
 From source::
 
   $ python3 -m venv env
   $ source env/bin/activate
   $ pip install git+https://github.com/sarnold/python-daemonizer.git
+
+The alternative to python venv is the Tox_ test driver.  If you have it
+installed already, clone this repository and try the following commands
+from the python-daemonizer source directory.
+
+To install in dev mode and run the tests::
+
+  $ tox -e py
+
+To run pylint::
+
+  $ tox -e lint
+
+
+.. note:: After installing in dev mode, use the environment created by
+          Tox just like any other Python virtual environment.  The dev
+          install mode of Pip allows you to edit the script and run it
+          again while inside the virtual environment. By default Tox
+          environments are created under ``.tox/`` and named after the
+          env argument (eg, py).
+
 
 To install the latest release, eg with your own ``tox.ini`` file in
 another project, use something like this::
@@ -112,8 +133,8 @@ something like::
 
 then install it into the repo you just cloned::
 
-  $ git clone https://github.com/sarnold/pyserv
-  $ cd pyserv/
+  $ git clone https://github.com/sarnold/python-daemonizer
+  $ cd python-daemonizer/
   $ pre-commit install
 
 It's usually a good idea to update the hooks to the latest version::
@@ -144,32 +165,32 @@ To run all ``pre-commit`` checks manually, try::
 .. _pre-commit: https://pre-commit.com/index.html
 
 
-.. |ci| image:: https://github.com/sarnold/pyserv/actions/workflows/ci.yml/badge.svg
-    :target: https://github.com/sarnold/pyserv/actions/workflows/ci.yml
+.. |ci| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/ci.yml/badge.svg
+    :target: https://github.com/sarnold/python-daemonizer/actions/workflows/ci.yml
     :alt: CI Status
 
-.. |wheels| image:: https://github.com/sarnold/pyserv/actions/workflows/wheels.yml/badge.svg
-    :target: https://github.com/sarnold/pyserv/actions/workflows/wheels.yml
+.. |wheels| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/wheels.yml/badge.svg
+    :target: https://github.com/sarnold/python-daemonizer/actions/workflows/wheels.yml
     :alt: Wheel Status
 
-.. |badge| image:: https://github.com/sarnold/pyserv/actions/workflows/pylint.yml/badge.svg
-    :target: https://github.com/sarnold/pyserv/actions/workflows/pylint.yml
+.. |badge| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml/badge.svg
+    :target: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml
     :alt: Pylint Status
 
-.. |release| image:: https://github.com/sarnold/pyserv/actions/workflows/release.yml/badge.svg
-    :target: https://github.com/sarnold/pyserv/actions/workflows/release.yml
+.. |release| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml/badge.svg
+    :target: https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml
     :alt: Release Status
 
-.. |pylint| image:: https://raw.githubusercontent.com/sarnold/pyserv/badges/master/pylint-score.svg
-    :target: https://github.com/sarnold/pyserv/actions/workflows/pylint.yml
+.. |pylint| image:: https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/pylint-score.svg
+    :target: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml
     :alt: Pylint score
 
-.. |license| image:: https://img.shields.io/github/license/sarnold/pyserv
-    :target: https://github.com/sarnold/pyserv/blob/master/LICENSE
+.. |license| image:: https://img.shields.io/github/license/sarnold/python-daemonizer
+    :target: https://github.com/sarnold/python-daemonizer/blob/master/LICENSE
     :alt: License
 
-.. |tag| image:: https://img.shields.io/github/v/tag/sarnold/pyserv?color=green&include_prereleases&label=latest%20release
-    :target: https://github.com/sarnold/pyserv/releases
+.. |tag| image:: https://img.shields.io/github/v/tag/sarnold/python-daemonizer?color=green&include_prereleases&label=latest%20release
+    :target: https://github.com/sarnold/python-daemonizer/releases
     :alt: GitHub tag
 
 .. |python| image:: https://img.shields.io/badge/python-3.6+-blue.svg
