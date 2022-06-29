@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import test.settings as s
 import time
 import unittest
 
-import test.settings as s
-
 from daemon import Daemon
 from daemon.parent_logger import setup_logging
-
 
 if s.DEBUG:
     debug = True

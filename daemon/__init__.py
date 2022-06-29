@@ -19,11 +19,9 @@ import os
 import signal
 import sys
 import time
-
 from datetime import timezone
 
 from ._version import __version__
-
 
 logger = logging.getLogger(__name__)
 utc_stamp = datetime.datetime.now(timezone.utc)
@@ -37,17 +35,26 @@ def timestamp():
     sys.stdout.write('{:%Y-%m-%d %H:%M:%S %Z}\n'.format(utc_stamp))
 
 
-class Daemon():
+class Daemon:
     """
     A generic daemon class.
 
     Usage: subclass the Daemon class and override the run() method
     """
-    def __init__(self, pidfile, stdin=os.devnull,
-                 stdout=os.devnull, stderr=os.devnull,
-                 home_dir='.', umask=0o22, verbose=1,
-                 use_gevent=False, use_eventlet=False,
-                 use_cleanup=False):
+
+    def __init__(
+        self,
+        pidfile,
+        stdin=os.devnull,
+        stdout=os.devnull,
+        stderr=os.devnull,
+        home_dir='.',
+        umask=0o22,
+        verbose=1,
+        use_gevent=False,
+        use_eventlet=False,
+        use_cleanup=False,
+    ):
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
@@ -71,6 +78,7 @@ class Daemon():
         """
         if self.use_eventlet:
             import eventlet.tpool
+
             eventlet.tpool.killall()
         try:
             pid = os.fork()
@@ -78,8 +86,7 @@ class Daemon():
                 # Exit first parent
                 sys.exit(0)
         except OSError as e:
-            sys.stderr.write(
-                "fork #1 failed: %d (%s)\n" % (e.errno, e.strerror))
+            sys.stderr.write("fork #1 failed: %d (%s)\n" % (e.errno, e.strerror))
             sys.exit(1)
 
         # Decouple from parent environment
@@ -94,8 +101,7 @@ class Daemon():
                 # Exit from second parent
                 sys.exit(0)
         except OSError as e:
-            sys.stderr.write(
-                "fork #2 failed: %d (%s)\n" % (e.errno, e.strerror))
+            sys.stderr.write("fork #2 failed: %d (%s)\n" % (e.errno, e.strerror))
             sys.exit(1)
 
         if sys.platform != 'darwin':  # This block breaks on OS X
@@ -125,6 +131,7 @@ class Daemon():
 
         if self.use_gevent:
             import gevent
+
             gevent.reinit()
             gevent.signal_handler(signal.SIGTERM, sigtermhandler, signal.SIGTERM, None)
             gevent.signal_handler(signal.SIGINT, sigtermhandler, signal.SIGINT, None)
@@ -139,8 +146,7 @@ class Daemon():
             logger.info('Started')
 
         # Write pidfile
-        atexit.register(
-            self.delpid)  # Make sure pid file is removed if we quit
+        atexit.register(self.delpid)  # Make sure pid file is removed if we quit
         pid = str(os.getpid())
         open(self.pidfile, 'w+', encoding='utf-8').write(f"{pid}\n")
 

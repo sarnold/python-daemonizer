@@ -1,10 +1,10 @@
-gevent
-eventlet
-pytest
-pytest-cov
 coverage[toml]
 coverage_python_version
-sphinx
+eventlet
+gevent
+pytest
+pytest-cov
 recommonmark
+sphinx
 sphinx_rtd_theme
 sphinxcontrib-apidoc

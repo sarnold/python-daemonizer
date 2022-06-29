@@ -23,21 +23,22 @@ Quick Start
 Usage
 -----
 
-Define a class which inherits from `Daemon` and has a ``run()`` method
+Define a class which inherits from ``Daemon`` and has a ``run()`` method
 (which is what will be called once the daemonization is completed.
 
-::
+.. code-block::
+
   from daemon import Daemon
 
   class pantalaimon(Daemon):
       def run(self):
           # Do stuff
-			
+
 Create a new object of your class, specifying where you want your PID
 file to exist::
 
-	pineMarten = pantalaimon('/path/to/pid.pid')
-	pineMarten.start()
+  pineMarten = pantalaimon('/path/to/pid.pid')
+  pineMarten.start()
 
 Actions
 -------
@@ -53,9 +54,9 @@ This is useful for debugging because you can start the code without
 making it a daemon. The running script then depends on the open shell
 like any normal Python script.
 
-To do this, just call the `run()` method directly::
+To do this, just call the ``run()`` method directly::
 
-	pineMarten.run()
+  pineMarten.run()
 
 Continuous execution
 --------------------
