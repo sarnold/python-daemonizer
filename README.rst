@@ -2,9 +2,9 @@
  Python Daemonizer Class
 =========================
 
-|ci| |wheels| |release| |badge|
+|ci| |wheels| |release| |badge| |coverage|
 
-|pre| |pylint|
+|pre| |cov| |pylint|
 
 |tag| |license| |python|
 
@@ -178,6 +178,10 @@ To run all ``pre-commit`` checks manually, try::
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/wheels.yml
     :alt: Wheel Status
 
+.. |coverage| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/coverage.yml/badge.svg
+    :target: https://github.com/sarnold/python-daemonizer/actions/workflows/coverage.yml
+    :alt: Coverage workflow
+
 .. |badge| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml/badge.svg
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml
     :alt: Pylint Status
@@ -185,6 +189,10 @@ To run all ``pre-commit`` checks manually, try::
 .. |release| image:: https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml/badge.svg
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml
     :alt: Release Status
+
+.. |cov| image:: https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/test-coverage.svg
+    :target: https://github.com/sarnold/python-daemonizer/
+    :alt: Test coverage
 
 .. |pylint| image:: https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/pylint-score.svg
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml
