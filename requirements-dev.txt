@@ -1,4 +1,10 @@
+coverage[toml]
+coverage_python_version
+eventlet
+gevent
 pytest
 pytest-cov
-pytest-flake8
-coverage_python_version
+recommonmark
+sphinx
+sphinx_rtd_theme
+sphinxcontrib-apidoc
