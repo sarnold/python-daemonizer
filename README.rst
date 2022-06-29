@@ -185,7 +185,7 @@ To run all ``pre-commit`` checks manually, try::
     :target: https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml
     :alt: Pylint score
 
-.. |license| image:: https://img.shields.io/badge/license-CC-BY-SA-3.0-blue.svg
+.. |license| image:: https://img.shields.io/badge/license-CC--BY--SA--3.0-blue
     :target: https://github.com/sarnold/python-daemonizer/blob/master/LICENSE
     :alt: License
 
