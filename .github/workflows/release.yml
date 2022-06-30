@@ -88,4 +88,4 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            wheels/py*.whl
+            wheels/da*.whl
