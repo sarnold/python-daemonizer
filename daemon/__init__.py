@@ -24,7 +24,6 @@ from datetime import timezone
 
 from ._version import __version__
 
-logger = logging.getLogger(__name__)
 utc_stamp = datetime.datetime.now(timezone.utc)
 
 
@@ -40,7 +39,7 @@ class Daemon:
     """
     A generic daemon class.
 
-    Usage: subclass the Daemon class and override the run() method
+    Usage: subclass the Daemon class and override the run() method.
     """
 
     def __init__(
@@ -144,7 +143,7 @@ class Daemon:
             timestamp()
             self.log("Started")
         else:
-            logger.info('Started')
+            logging.info('Started')
 
         # Write pidfile
         atexit.register(self.delpid)  # Make sure pid file is removed if we quit
@@ -175,7 +174,7 @@ class Daemon:
             timestamp()
             self.log("Starting...")
         else:
-            logger.info('Starting...')
+            logging.info('Starting...')
 
         # Check for a pidfile to see if the daemon already runs
         try:
@@ -200,19 +199,20 @@ class Daemon:
         """
         Get status from the daemon
         """
+        daemon_running = self.is_running()
 
-        if not self.is_running():
-            message = "pidfile %s does not exist. Not running?\n"
-            sys.stderr.write(message % self.pidfile)
-        else:
+        if daemon_running:
             message = "pidfile %s found, daemon PID is %d\n"
             sys.stdout.write(message % (self.pidfile, self.get_pid()))
+        else:
+            message = "pidfile %s does not exist. Not running?\n"
+            sys.stderr.write(message % self.pidfile)
 
         if self.verbose >= 1:
             timestamp()
             self.log(f"{__name__} status is: {self.is_running()}")
 
-        return self.is_running()
+        return daemon_running
 
     def stop(self):
         """
@@ -223,7 +223,7 @@ class Daemon:
             timestamp()
             self.log("Stopping...")
         else:
-            logger.info('Stopping...')
+            logging.info('Stopping...')
 
         # Get the pid from the pidfile
         pid = self.get_pid()
@@ -268,8 +268,8 @@ class Daemon:
     def cleanup(self):
         """
         You should override this method if you need cleanup handlers on
-        shutdwon (ie, prior to sigterm handling) and set use_cleanup to
-        ``True`` when you subclass daemon().
+        shutdown (ie, prior to sigterm handling) and set use_cleanup to
+        ``True`` when you subclass Daemon().
         """
         raise NotImplementedError
 
@@ -299,12 +299,12 @@ class Daemon:
         pid = self.get_pid()
 
         if pid is None:
-            logger.debug('Process is stopped')
+            logging.debug('Process is stopped')
             return False
         if os.path.exists(f'/proc/{pid}'):
-            logger.debug('Process (pid %d) is running...', pid)
+            logging.info('Process (pid %d) is running...', pid)
             return True
-        logger.debug('Process (pid %d) is killed', pid)
+        logging.debug('Process (pid %d) is killed', pid)
         return False
 
     def run(self):
