@@ -7,7 +7,7 @@ import logging
 import time
 
 
-def setup_logging(debug, filename):
+def setup_logging(debug, filename, modname=None):
     """
     Can be imported by ``<my_package>`` to create a log file for logging
     ``<my_package>`` class output.  In this example we use a ``debug``
@@ -19,15 +19,23 @@ def setup_logging(debug, filename):
     else:
         log_level = logging.getLevelName('INFO')
 
-    # process format:
-    #   '%(asctime)s %(name)s[%(process)d] %(levelname)s - %(message)s'
-    # alt format
-    #   '%(asctime)s %(levelname)s %(filename)s(%(lineno)d) %(message)s'
-    # long format
-    #   '%(asctime)s %(name)s.%(funcName)s +%(lineno)s: %(levelname)s [%(process)d] %(message)s'
+    if not modname:
+        my_fmt = '%(asctime)s %(levelname)s %(name)s.%(funcName)s(%(lineno)d) %(message)s'
+    else:
+        my_fmt = '%(asctime)s %(levelname)s %(mod_name)s.%(funcName)s(%(lineno)d) %(message)s'
+
+        default_factory = logging.getLogRecordFactory()
+
+        def record_factory(*args, **kwargs):
+            record = default_factory(*args, **kwargs)
+            record.mod_name = modname
+            return record
+
+        logging.setLogRecordFactory(record_factory)
+
     logging.basicConfig(
         level=log_level,
-        format='%(asctime)s %(levelname)s %(filename)s(%(lineno)d) %(message)s',
+        format=my_fmt,
         datefmt='%Y-%m-%d %H:%M:%S UTC',
         filename=filename,
     )
