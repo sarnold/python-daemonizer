@@ -24,7 +24,7 @@ Usage
 -----
 
 Define a class which inherits from ``Daemon`` and has a ``run()`` method
-(which is what will be called once the daemonization is completed.
+(which is what will be called once the daemonization is completed).
 
 .. code-block:: python
 
