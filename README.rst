@@ -36,6 +36,10 @@ Define a class which inherits from ``Daemon`` and has a ``run()`` method
           do_mything()
 
 
+Depending on what your code is doing, you may also want to subclass the
+``cleanup()`` method to close sockets, etc (called after ``stop()`` and
+before termination).
+
 Create a new object of your class, specifying where you want your PID
 file to exist:
 
@@ -48,9 +52,10 @@ file to exist:
 Actions
 -------
 
-* ``start()`` - starts the daemon (creates PID and daemonizes).
-* ``stop()`` - stops the daemon (stops the child process and removes the PID).
-* ``restart()`` - does ``stop()`` then ``start()``.
+* ``start`` - start the daemon (create PID and daemonize)
+* ``stop`` - stop the daemon (stop the child process and remove the PID)
+* ``restart`` - run ``stop`` then ``start``
+* ``status`` - show daemon status
 
 Foreground
 ----------
@@ -59,7 +64,9 @@ This is useful for debugging because you can start the code without
 making it a daemon. The running script then depends on the open shell
 like any normal Python script.
 
-To do this, just call the ``run()`` method directly::
+To do this, just call the ``run()`` method directly instead of ``start()``:
+
+.. code-block:: python
 
   pineMarten.run()
 
@@ -67,12 +74,12 @@ Continuous execution
 --------------------
 
 The ``run()`` method will be executed just once so if you want the daemon
-to be doing stuff continuously you may wish to use the sched_ module
+to be doing stuff continuously you may wish to use the schedule_ module
 to execute code repeatedly (example_).
 
 
-.. _sched: http://docs.python.org/library/sched.html
-.. _example: https://github.com/serverdensity/sd-agent/blob/master/agent.py#L339
+.. _schedule: https://pypi.org/project/schedule/
+.. _example: https://github.com/freepn/fpnd/blob/f9a6622ac9b3f562a1dbfcec2f94947375189fc0/scripts/fpnd.py#L171
 
 Install with pip
 ----------------
