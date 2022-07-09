@@ -217,6 +217,10 @@ To run all ``pre-commit`` checks manually, try::
     :target: https://www.python.org/downloads/
     :alt: Python
 
+.. |plat| image:: https://img.shields.io/badge/platforms-POSIX-blue.svg
+    :target: https://github.com/sarnold/python-daemonizer/
+    :alt: Platform
+
 .. |pre| image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
    :target: https://github.com/pre-commit/pre-commit
    :alt: pre-commit
