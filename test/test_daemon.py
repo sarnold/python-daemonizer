@@ -49,7 +49,7 @@ class TestDaemon(unittest.TestCase):
 
     def test_daemon_can_stop(self):
         control_daemon('stop')
-        time.sleep(0.4)
+        time.sleep(0.45)
         assert self.testoutput.read() == 'cleanup'
         assert os.path.exists(s.PIDFILE) is False
 
