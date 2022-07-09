@@ -1,0 +1,7 @@
+daemon.parent\_logger module
+============================
+
+.. automodule:: daemon.parent_logger
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,18 @@
+daemon package
+==============
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   daemon.parent_logger
+
+Module contents
+---------------
+
+.. automodule:: daemon
+   :members:
+   :undoc-members:
+   :show-inheritance:
