@@ -1,12 +1,12 @@
-# internal coverage with PR comment and badge v0.0.4
-# Note this works for public orgs but probably only for "internal"
-# pull requests. In the case of fork PRs, there needs to be org-level
+# internal coverage with PR comment and badge v0.0.5
+# Note this works for public orgs but only for "internal" pull
+# requests. In the case of fork PRs, there needs to be org-level
 # github app with private key => ACCESS_TOKEN, with more job isolation
 # and output passing in this workflow.
 #
 # This version has updated actions and coverage value regex, no fork isolation
 # yet. Badge and comment job logic should be tuned for personal vs org use
-# (fork PRs still need the big refactor; see badge job comments below).
+# (fork PRs still needs the big refactor; see badge job comments below).
 name: Coverage
 
 on:
@@ -21,12 +21,12 @@ jobs:
     name: Prepare CI environment
     runs-on: ubuntu-20.04
     outputs:
-      commit_message: ${{ steps.get_commit_message.outputs.commit_message }}
+      #commit_message: ${{ steps.get_commit_message.outputs.commit_message }}
       branch: ${{ steps.extract_branch.outputs.branch }}
 
     steps:
     - name: Checkout Project
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         # We need to fetch with a depth of 2 for pull_request so we can do HEAD^2
         fetch-depth: 2
@@ -35,13 +35,13 @@ jobs:
       run: |
         bash -c set
 
-    - name: "Get commit message"
-      id: get_commit_message
-      env:
-        COMMIT_PUSH: ${{ github.event.head_commit.message }}
-      run: |
-        COMMIT_MESSAGE="${COMMIT_PUSH:-$(git log --format=%B -n 1 HEAD^2)}"
-        echo "::set-output name=commit_message::${COMMIT_MESSAGE}"
+    #- name: "Get commit message"
+      #id: get_commit_message
+      #env:
+        #COMMIT_PUSH: ${{ github.event.head_commit.message }}
+      #run: |
+        #COMMIT_MESSAGE="${COMMIT_PUSH:-$(git log --format=%B -n 1 HEAD^2)}"
+        #echo "commit_message=${COMMIT_MESSAGE}" >> $GITHUB_OUTPUT
 
     - name: Extract branch name
       id: extract_branch
@@ -56,7 +56,7 @@ jobs:
         else
             EXPORT_VALUE="${TMP_GITHUB_REF}"
         fi
-        echo "##[set-output name=branch;]${EXPORT_VALUE}"
+        echo "branch=${EXPORT_VALUE}" >> $GITHUB_OUTPUT
 
   base:
     name: Base coverage
@@ -66,7 +66,7 @@ jobs:
       base_cov: ${{ steps.get_base.outputs.base_cov }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         ref: badges
         path: badges
@@ -87,13 +87,13 @@ jobs:
         else
             EXPORT_VALUE="${TMP_GITHUB_REF}"
         fi
-        echo "##[set-output name=base_branch;]${EXPORT_VALUE}"
+        echo "base_branch=${EXPORT_VALUE}" >> $GITHUB_OUTPUT
         if [ -f "${EXPORT_VALUE}/${FILE}" ]
         then
             echo "Base coverage found on ${EXPORT_VALUE}"
             BASE_COV=$(cat "${EXPORT_VALUE}/${FILE}")
             echo "Base coverage is: ${BASE_COV}"
-            echo "##[set-output name=base_cov;]${BASE_COV}"
+            echo "base_cov=${BASE_COV}" >> $GITHUB_OUTPUT
         else
             echo "Base coverage NOT found on ${EXPORT_VALUE}!!"
         fi
@@ -107,12 +107,12 @@ jobs:
     - name: Check github variables
       # NOTE base coverage env var may be empty here
       env:
-        COMMIT_MESSAGE: ${{ needs.pre_ci.outputs.commit_message }}
+        #COMMIT_MESSAGE: ${{ needs.pre_ci.outputs.commit_message }}
         EXPORT_VALUE: ${{ needs.pre_ci.outputs.branch }}
         BASE_BRANCH: ${{ needs.base.outputs.base_branch }}
         BASE_COVERAGE: ${{ needs.base.outputs.base_cov }}
       run: |
-        echo "Commit message: ${COMMIT_MESSAGE}"
+        #echo "Commit message: ${COMMIT_MESSAGE}"
         echo "Export value (head_ref): ${EXPORT_VALUE}"
         echo "Base value (base_ref): ${BASE_BRANCH}"
         echo "Base coverage (percent): ${{ env.BASE_COVERAGE }}"
@@ -129,16 +129,16 @@ jobs:
       coverage-rounded-display: ${{ steps.coverage.outputs.coverage-rounded-display }}
     env:
       PLATFORM: ubuntu-20.04
-      PYTHON: 3.9
+      PYTHON: '3.11'
       PYTHONIOENCODING: utf-8
       PIP_DOWNLOAD_CACHE: ${{ github.workspace }}/../.pip_download_cache
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
-    - uses: actions/setup-python@v2
+    - uses: actions/setup-python@v4
       with:
         python-version: ${{ env.PYTHON }}
 
@@ -147,17 +147,22 @@ jobs:
         python -m pip install --upgrade pip
         pip install tox
 
-    - name: Generate coverage and fix pkg name
+    - name: Setup old python for test
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.7
+
+    - name: Generate coverage
       run: |
-        tox -e py
+        tox -e coverage,py37,py311
 
     - name: Code Coverage Summary Report (data)
-      uses: irongut/CodeCoverageSummary@v1.1.0
+      uses: irongut/CodeCoverageSummary@v1.3.0
       with:
         filename: coverage.xml
         output: 'both'
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: src_coverage_rpts
         path: |
@@ -171,12 +176,12 @@ jobs:
         VALUE: "Branch Rate"
       run: |
         COVERAGE=$( cat code-coverage-results.txt | grep -e ^Summary | grep -o -E "${VALUE} = .{3}" | egrep -o '([0-9]+)' )
-        echo "##[set-output name=coverage;]${COVERAGE}"
-        echo "##[set-output name=coverage-rounded-display;]${COVERAGE}%"
+        echo "coverage=${COVERAGE}" >> $GITHUB_OUTPUT
+        echo "coverage-rounded-display=${COVERAGE}%" >> $GITHUB_OUTPUT
         echo "Current coverage is: ${COVERAGE}%"
 
     - name: Code Coverage Summary Report
-      uses: irongut/CodeCoverageSummary@v1.1.0
+      uses: irongut/CodeCoverageSummary@v1.3.0
       if: ${{ github.event_name == 'pull_request' }}
       with:
         filename: coverage.xml
@@ -184,8 +189,8 @@ jobs:
         output: 'both'
 
     - name: Add Coverage PR Comment
-      uses: marocchino/sticky-pull-request-comment@v2.2.0
-      if: ${{ github.event_name == 'pull_request' && github.actor == github.repository_owner }}
+      uses: marocchino/sticky-pull-request-comment@v2
+      if: github.event_name == 'pull_request' && (github.event.pull_request.author_association == 'MEMBER' || github.actor == github.repository_owner)
       with:
         header: coverage
         recreate: true
@@ -206,10 +211,12 @@ jobs:
         COVERAGE: ${{ needs.cov_data.outputs.coverage }}
         COVERAGE_ROUNDED: ${{ needs.cov_data.outputs.coverage-rounded-display }}
         BASE_COVERAGE: ${{ needs.base.outputs.base_cov }}
+        MEMBER: ${{ github.event.pull_request.author_association }}
       run: |
         echo "Coverage: ${COVERAGE}"
         echo "Coverage Rounded: ${COVERAGE_ROUNDED}"
         echo "Coverage on Base Branch: ${BASE_COVERAGE}"
+        echo "Author assoc: ${MEMBER}"
 
   comment_cov_change:
     name: Comment on PR with coverage delta
@@ -273,8 +280,8 @@ jobs:
         fi
 
     - name: Comment PR with test coverage delta
-      uses: marocchino/sticky-pull-request-comment@v2.2.0
-      if: env.HAVE_BASE_COVERAGE == 'true'
+      uses: marocchino/sticky-pull-request-comment@v2
+      if: env.HAVE_BASE_COVERAGE == 'true' && (github.event.pull_request.author_association == 'MEMBER' || github.actor == github.repository_owner)
       with:
         header: delta
         recreate: true
@@ -293,20 +300,20 @@ jobs:
     name: Generate badge image with test coverage value
     runs-on: ubuntu-20.04
     needs: [test, pre_ci]
-    if: ${{ github.event_name == 'push' }}
+    if: github.event_name == 'push'
     outputs:
       url: ${{ steps.url.outputs.url }}
       markdown: ${{ steps.url.outputs.markdown }}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         ref: badges
         path: badges
 
     # Use the output from the `coverage` step
     - name: Generate the badge SVG image
-      uses: emibcn/badge-action@v1
+      uses: emibcn/badge-action@v2.0.2
       id: badge
       with:
         label: 'Branch Coverage'

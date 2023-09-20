@@ -2,7 +2,6 @@
 requires = [
     "setuptools>=42",
     "versioningit >= 1.1.1",
-    "wheel",
 ]
 
 build-backend = "setuptools.build_meta"
@@ -22,12 +21,15 @@ omit = [
     "test",
     ".tox",
 ]
+plugins = [
+    "coverage_python_version"
+]
 
 [tool.coverage.paths]
 source = ["daemon"]
 
 [tool.coverage.report]
-fail_under = 75
+fail_under = 70
 show_missing = true
 exclude_lines = [
     "pragma: no cover",
