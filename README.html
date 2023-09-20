@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python Daemonizer Class &mdash; daemonizer 0.3.5.dev2 documentation</title>
+  <title>Python Daemonizer Class &mdash; daemonizer 0.3.6.dev6 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f55a9a24"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,14 +28,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> daemonizer
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            daemonizer
           </a>
               <div class="version">
-                0.3.5.dev2
+                0.3
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -71,8 +75,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Python Daemonizer Class</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python Daemonizer Class</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -83,7 +87,7 @@
            <div itemprop="articleBody">
              
   <section id="python-daemonizer-class">
-<h1>Python Daemonizer Class<a class="headerlink" href="#python-daemonizer-class" title="Permalink to this heading"></a></h1>
+<h1>Python Daemonizer Class<a class="headerlink" href="#python-daemonizer-class" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/ci.yml"><img alt="CI Status" src="https://github.com/sarnold/python-daemonizer/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/wheels.yml"><img alt="Wheel Status" src="https://github.com/sarnold/python-daemonizer/actions/workflows/wheels.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml"><img alt="Release Status" src="https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml"><img alt="Pylint Status" src="https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/coverage.yml"><img alt="Coverage workflow" src="https://github.com/sarnold/python-daemonizer/actions/workflows/coverage.yml/badge.svg" /></a></p>
 <p><a class="reference external" href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/"><img alt="Test coverage" src="https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/test-coverage.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml"><img alt="Pylint score" src="https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/pylint-score.svg" /></a></p>
 <p><a class="reference external" href="https://github.com/sarnold/python-daemonizer/releases"><img alt="GitHub tag" src="https://img.shields.io/github/v/tag/sarnold/python-daemonizer?color=green&amp;include_prereleases&amp;label=latest%20release" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-CC--BY--SA--3.0-blue" /></a> <a class="reference external" href="https://www.python.org/downloads/"><img alt="Python" src="https://img.shields.io/badge/python-3.6+-blue.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/"><img alt="Platform" src="https://img.shields.io/badge/platforms-POSIX-blue.svg" /></a></p>
@@ -93,9 +97,9 @@ creates a PID file and has standard commands (start, stop, restart) plus
 a foreground mode.</p>
 <p>Based on <a class="reference external" href="http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/">this original version from jejik.com</a>.</p>
 <section id="quick-start">
-<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <section id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h3>
 <p>Define a class which inherits from <code class="docutils literal notranslate"><span class="pre">Daemon</span></code> and has a <code class="docutils literal notranslate"><span class="pre">run()</span></code> method
 (which is what will be called once the daemonization is completed).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">daemon</span> <span class="kn">import</span> <span class="n">Daemon</span>
@@ -117,7 +121,7 @@ file to exist:</p>
 </div>
 </section>
 <section id="actions">
-<h3>Actions<a class="headerlink" href="#actions" title="Permalink to this heading"></a></h3>
+<h3>Actions<a class="headerlink" href="#actions" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">start</span></code> - start the daemon (create PID and daemonize)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stop</span></code> - stop the daemon (stop the child process and remove the PID)</p></li>
@@ -126,7 +130,7 @@ file to exist:</p>
 </ul>
 </section>
 <section id="foreground">
-<h3>Foreground<a class="headerlink" href="#foreground" title="Permalink to this heading"></a></h3>
+<h3>Foreground<a class="headerlink" href="#foreground" title="Link to this heading"></a></h3>
 <p>This is useful for debugging because you can start the code without
 making it a daemon. The running script then depends on the open shell
 like any normal Python script.</p>
@@ -136,14 +140,14 @@ like any normal Python script.</p>
 </div>
 </section>
 <section id="continuous-execution">
-<h3>Continuous execution<a class="headerlink" href="#continuous-execution" title="Permalink to this heading"></a></h3>
+<h3>Continuous execution<a class="headerlink" href="#continuous-execution" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">run()</span></code> method will be executed just once so if you want the daemon
 to be doing stuff continuously you may wish to use the <a class="reference external" href="https://pypi.org/project/schedule/">schedule</a> module
-to execute code snippets repeatedly (<a class="reference external" href="https://github.com/freepn/fpnd/blob/f9a6622ac9b3f562a1dbfcec2f94947375189fc0/scripts/fpnd.py#L171">example</a>). For another example that
+to execute code snippets repeatedly (<a class="reference external" href="https://schedule.readthedocs.io/en/stable/examples.html">examples</a>). For another example that
 does not use a scheduler, see the <a class="reference external" href="https://github.com/sarnold/pyserv/">pyserv</a> <code class="docutils literal notranslate"><span class="pre">httpdaemon</span></code> <a class="reference external" href="https://github.com/sarnold/pyserv/blob/master/scripts/httpdaemon">script</a>.</p>
 </section>
 <section id="install-with-pip">
-<h3>Install with pip<a class="headerlink" href="#install-with-pip" title="Permalink to this heading"></a></h3>
+<h3>Install with pip<a class="headerlink" href="#install-with-pip" title="Link to this heading"></a></h3>
 <p>This updated version is <em>not</em> published on PyPI, thus use one of the
 following commands to install the latest python-daemonizer in a Python
 virtual environment on any platform.</p>
@@ -180,7 +184,7 @@ another project, use something like this:</p>
 </div>
 </section>
 <section id="pre-commit">
-<h3>Pre-commit<a class="headerlink" href="#pre-commit" title="Permalink to this heading"></a></h3>
+<h3>Pre-commit<a class="headerlink" href="#pre-commit" title="Link to this heading"></a></h3>
 <p>This repo is now <a class="reference external" href="https://pre-commit.com/index.html">pre-commit</a> enabled for python/rst source and file-type
 linting. The checks run automatically on commit and will fail the commit
 (if not clean) and perform simple file corrections.  For example, if the
@@ -239,7 +243,7 @@ $ pre-commit run rst-inline-touching-normal -a
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

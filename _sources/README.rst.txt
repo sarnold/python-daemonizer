@@ -75,13 +75,13 @@ Continuous execution
 
 The ``run()`` method will be executed just once so if you want the daemon
 to be doing stuff continuously you may wish to use the schedule_ module
-to execute code snippets repeatedly (example_). For another example that
+to execute code snippets repeatedly (examples_). For another example that
 does not use a scheduler, see the pyserv_ ``httpdaemon`` script_.
 
 
 
 .. _schedule: https://pypi.org/project/schedule/
-.. _example: https://github.com/freepn/fpnd/blob/f9a6622ac9b3f562a1dbfcec2f94947375189fc0/scripts/fpnd.py#L171
+.. _examples: https://schedule.readthedocs.io/en/stable/examples.html
 .. _pyserv: https://github.com/sarnold/pyserv/
 .. _script: https://github.com/sarnold/pyserv/blob/master/scripts/httpdaemon
 
