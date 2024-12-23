@@ -2,3 +2,5 @@ graft test
 graft docs
 
 include tox.ini *.rst *.txt
+prune .git*
+prune test/__pycache__

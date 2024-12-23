@@ -1,4 +1,4 @@
-# internal coverage with PR comment and badge v0.0.5
+# internal coverage with PR comment and badge v0.0.6
 # Note this works for public orgs but only for "internal" pull
 # requests. In the case of fork PRs, there needs to be org-level
 # github app with private key => ACCESS_TOKEN, with more job isolation
@@ -19,14 +19,14 @@ on:
 jobs:
   pre_ci:
     name: Prepare CI environment
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     outputs:
       #commit_message: ${{ steps.get_commit_message.outputs.commit_message }}
       branch: ${{ steps.extract_branch.outputs.branch }}
 
     steps:
     - name: Checkout Project
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         # We need to fetch with a depth of 2 for pull_request so we can do HEAD^2
         fetch-depth: 2
@@ -60,13 +60,13 @@ jobs:
 
   base:
     name: Base coverage
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     outputs:
       base_branch: ${{ steps.get_base.outputs.base_branch }}
       base_cov: ${{ steps.get_base.outputs.base_cov }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         ref: badges
         path: badges
@@ -100,7 +100,7 @@ jobs:
 
   check:
     name: Pre CI check
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [pre_ci, base]
 
     steps:
@@ -134,11 +134,11 @@ jobs:
       PIP_DOWNLOAD_CACHE: ${{ github.workspace }}/../.pip_download_cache
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: ${{ env.PYTHON }}
 
@@ -154,7 +154,7 @@ jobs:
 
     - name: Generate coverage
       run: |
-        tox -e coverage,py37,py311
+        tox -e py,coverage
 
     - name: Code Coverage Summary Report (data)
       uses: irongut/CodeCoverageSummary@v1.3.0
@@ -162,7 +162,7 @@ jobs:
         filename: coverage.xml
         output: 'both'
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: src_coverage_rpts
         path: |
@@ -198,7 +198,7 @@ jobs:
 
   test:
     name: Coverage check
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [cov_data, base]
     outputs:
       coverage: ${{ needs.cov_data.outputs.coverage }}
@@ -220,7 +220,7 @@ jobs:
 
   comment_cov_change:
     name: Comment on PR with coverage delta
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [test, base]
 
     steps:
@@ -298,7 +298,7 @@ jobs:
     #   - This is a pull request event and the pull actor is the same as the repo owner
     #     if: ${{ ( github.event_name == 'pull_request' && github.actor == github.repository_owner ) || github.ref == 'refs/heads/master' }}
     name: Generate badge image with test coverage value
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: [test, pre_ci]
     if: github.event_name == 'push'
     outputs:
@@ -306,7 +306,7 @@ jobs:
       markdown: ${{ steps.url.outputs.markdown }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         ref: badges
         path: badges
