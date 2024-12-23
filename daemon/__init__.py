@@ -142,8 +142,7 @@ class Daemon:
         if self.verbose:
             timestamp()
             self.log("Started")
-        else:
-            logging.info('Started')
+        logging.info('Started')
 
         # Write pidfile
         atexit.register(self.delpid)  # Make sure pid file is removed if we quit
@@ -173,8 +172,7 @@ class Daemon:
         if self.verbose:
             timestamp()
             self.log("Starting...")
-        else:
-            logging.info('Starting...')
+        logging.debug('Starting...')
 
         # Check for a pidfile to see if the daemon already runs
         try:
@@ -218,12 +216,10 @@ class Daemon:
         """
         Stop the daemon
         """
-
         if self.verbose >= 1:
             timestamp()
             self.log("Stopping...")
-        else:
-            logging.info('Stopping...')
+        logging.debug('Stopping...')
 
         # Get the pid from the pidfile
         pid = self.get_pid()
@@ -256,7 +252,10 @@ class Daemon:
                 print(str(err))
                 sys.exit(1)
 
-        self.log("Stopped")
+        if self.verbose >= 1:
+            timestamp()
+            self.log("Stopped")
+        logging.info('Stopped')
 
     def restart(self):
         """
