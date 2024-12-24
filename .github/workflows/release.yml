@@ -18,8 +18,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, macos-latest, windows-latest]
-        python-version: [3.7, 3.8, 3.9, '3.10']
+        os: [ubuntu-22.04, macos-latest]
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12']
 
     steps:
     - name: Set git crlf/eol
@@ -27,12 +27,12 @@ jobs:
         git config --global core.autocrlf false
         git config --global core.eol lf
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -46,17 +46,16 @@ jobs:
         tox -e build
 
     - name: Upload artifacts
-      if: matrix.python-version == '3.8' && runner.os == 'Linux'
-      uses: actions/upload-artifact@v3
+      if: matrix.python-version == 3.9 && runner.os == 'Linux'
+      uses: actions/upload-artifact@v4
       with:
-        path: |
-          ./dist/*.whl
-          ./dist/*.tar.gz
+        name: packages
+        path: dist
 
   create_release:
     name: Create Release
     needs: [wheels]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Get version
@@ -65,12 +64,16 @@ jobs:
           echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
           echo ${{ env.VERSION }}
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       # download all artifacts to project dir
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
+
+      - name: check artifacts
+        run: |
+          ls -l packages/
 
       - name: Generate changes file
         uses: sarnold/gitchangelog-action@master
@@ -79,7 +82,7 @@ jobs:
 
       - name: Create release
         id: create_release
-        uses: softprops/action-gh-release@master
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -89,8 +92,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            artifact/*.whl
-            artifact/*.gz
+            packages/pyserv*
 
   docs:
     name: Release docs
@@ -98,11 +100,11 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
         python-version: '3.9'
 
@@ -116,7 +118,7 @@ jobs:
         tox -e docs-lint
         tox -e docs
 
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: ApiDocsHTML
         path: "docs/_build/html/"
@@ -129,4 +131,7 @@ jobs:
       if: ${{ github.event_name == 'push' }}
       uses: JamesIves/github-pages-deploy-action@v4
       with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
         folder: docs/_build/html/
+        single-commit: true
