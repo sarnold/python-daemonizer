@@ -14,6 +14,7 @@ Welcome to the daemonizer documentation!
 
    README.rst
    api/modules
+   CHANGELOG.rst
 
 
 Indices and tables
