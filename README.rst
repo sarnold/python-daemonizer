@@ -95,7 +95,7 @@ stand-alone `Python daemon`_ scripts with the same core server code, as
 well as a default user configuration adjustable via environment
 variables.
 
-.. _Pyserv: https://github.com/sarnold/pyserv?tab=readme-ov-file#daemons-and-console-entry-points
+.. _Pyserv: https://github.com/sarnold/pyserv
 .. _HTTP server: https://docs.python.org/3/library/http.server.html
 .. _WSGI: https://docs.python.org/3/library/wsgiref.html
 .. _Python daemon: https://github.com/sarnold/python-daemonizer

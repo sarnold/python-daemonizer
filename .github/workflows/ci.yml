@@ -7,9 +7,11 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  matrix_build:
 
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
     defaults:
       run:
         shell: bash
@@ -22,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, macos-latest]
-        python-version: [3.8, 3.9, '3.10', '3.11', '3.12']
+        python-version: [3.9, '3.10', '3.11', '3.12', '3.13']
     steps:
     - name: Set git crlf/eol
       run: |
@@ -45,6 +47,6 @@ jobs:
 
     - name: Run tests
       run: |
-        tox
+        tox -- no
       env:
         PLATFORM: ${{ matrix.os }}
