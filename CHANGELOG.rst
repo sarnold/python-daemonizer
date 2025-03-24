@@ -2,19 +2,29 @@ Changelog
 =========
 
 
-0.4.1-4-g4ea1c57
-----------------
+1.0.0 (2024-12-24)
+------------------
 
 New
 ~~~
+- Generate a changelog and add to doc index. [Stephen L Arnold]
 - Add tox cmd to generate changelog. [Stephen L Arnold]
 
 Changes
 ~~~~~~~
+- Add reuse badge and update changelog. [Stephen L Arnold]
+- Add REUSE config and make LICENSE a symlink to the text. [Stephen L
+  Arnold]
 - Update tox cmds and python versions, adjust project config. [Stephen L
   Arnold]
 
   * update readme and add .gitchangelog.rc file
+
+Fixes
+~~~~~
+- Disable link check in sphinx docs build workflow. [Stephen L Arnold]
+
+  * old changelog bits have too many crufty URLs
 
 
 0.4.1 (2024-12-24)
