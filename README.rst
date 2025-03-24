@@ -137,7 +137,12 @@ To run pylint::
 To install the latest release, eg with your own ``tox.ini`` file in
 another project, use something like this::
 
-  $ pip install -U -f https://github.com/sarnold/python-daemonizer/releases/ daemonizer
+  $ pip install https://github.com/sarnold/python-daemonizer/releases/download/0.4.0/daemonizer-0.4.0-py3-none-any.whl
+
+That said, the "proper" form for git-based dependencies would be more like
+this::
+
+  daemonizer @ git+https://github.com/sarnold/python-daemonizer.git@0.4.1#69d4c9b6f3916cd5ae87c8b3a78eca1015eeed0f
 
 
 .. _Tox: https://github.com/tox-dev/tox

@@ -16,7 +16,6 @@ updates:
 
   - package-ecosystem: "pip"
     directory: "/"
-    target-branch: "pcr"
     schedule:
       interval: "weekly"
     commit-message:
