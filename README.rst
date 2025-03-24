@@ -73,17 +73,32 @@ To do this, just call the ``run()`` method directly instead of ``start()``:
 Continuous execution
 --------------------
 
-The ``run()`` method will be executed just once so if you want the daemon
-to be doing stuff continuously you may wish to use the schedule_ module
-to execute code snippets repeatedly (examples_). For another example that
-does not use a scheduler, see the pyserv_ ``httpdaemon`` script_.
-
-
+The ``run()`` method will be executed just once so if you want the
+daemon to be doing stuff continuously you may wish to use the schedule_
+module to execute code snippets repeatedly (examples_). For daemon
+examples see the next section.
 
 .. _schedule: https://pypi.org/project/schedule/
 .. _examples: https://schedule.readthedocs.io/en/stable/examples.html
-.. _pyserv: https://github.com/sarnold/pyserv/
 .. _script: https://github.com/sarnold/pyserv/blob/master/scripts/httpdaemon
+
+Consumer examples
+~~~~~~~~~~~~~~~~~
+
+Pyserv_ is a growing collection of threaded Python server bits, including
+custom `HTTP server`_ and WSGI_ classes, along with corresponding console
+entry points and some daemon scripts. The latest addition includes an async
+version of the original tftpy-based daemon script.
+
+The ``httpdaemon``, ``atftpdaemon``, and ``tftpdaemon`` commands are
+stand-alone `Python daemon`_ scripts with the same core server code, as
+well as a default user configuration adjustable via environment
+variables.
+
+.. _Pyserv: https://github.com/sarnold/pyserv?tab=readme-ov-file#daemons-and-console-entry-points
+.. _HTTP server: https://docs.python.org/3/library/http.server.html
+.. _WSGI: https://docs.python.org/3/library/wsgiref.html
+.. _Python daemon: https://github.com/sarnold/python-daemonizer
 
 Install with pip
 ----------------
