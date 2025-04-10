@@ -1,0 +1,7 @@
+daemon
+======
+
+.. toctree::
+   :maxdepth: 4
+
+   daemon
