@@ -22,6 +22,6 @@ jobs:
     - name: Run bandit
       uses: VCTLabs/bandit-report-artifacts@b0679c4dff0c2ed69000132fabf6a9e1b7dcfd5c  # v0.0.3
       with:
-        project_path: daemon
+        project_path: src
         ignore_failure: false
         config_file: pyproject.toml
