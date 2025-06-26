@@ -13,23 +13,28 @@
 import os
 import sys
 
+from datetime import datetime
+
+import sphinx_nefertiti
+
 if sys.version_info < (3, 8):
     from importlib_metadata import version
 else:
     from importlib.metadata import version
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'daemonizer')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 # -- Project information -----------------------------------------------------
 
-project = 'daemonizer'
-copyright = '2023, Stephen L Arnold'
-author = 'Stephen Arnold'
+# The full version, including alpha/beta/rc tags with setuptols-scm
+# workaround for extra-long dirty version string
+release = version('daemonizer').split("+")[0]
+# screw the short X.Y version.
+version = release
 
-# The full version, including alpha/beta/rc tags
-release = version('daemonizer')
-# The short X.Y version.
-version = '.'.join(release.split('.')[:2])
+project = 'daemonizer'
+author = 'Stephen Arnold'
+copyright = '2019 - ' + str(datetime.now().year) + f' {author}'
 
 
 # -- General configuration ------------------------------------------------
@@ -45,17 +50,39 @@ extensions = [
     'sphinx_git',
     'sphinxcontrib.apidoc',
     'sphinx.ext.autodoc',
+    'sphinx.ext.autodoc.typehints',
     'sphinx.ext.doctest',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
-    'recommonmark',
+    'myst_parser',
+    #'sphinx_nefertiti',
+    #'sphinxcontrib.mermaid',
+]
+# do not render mermaid, show source instead
+#myst_fence_as_directive = ["mermaid"]
+
+myst_enable_extensions = [
+    'amsmath',
+    'attrs_block',
+    'colon_fence',
+    'deflist',
+    'dollarmath',
+    'fieldlist',
+    'tasklist',
+    'substitution',
 ]
 
-apidoc_module_dir = '../../daemon/'
+myst_suppress_warnings = ["myst.header"]
+
+# sphinxcontrib.apidoc
+apidoc_module_dir = f'../../src/{project}'
 apidoc_output_dir = 'api'
 apidoc_excluded_paths = ['test']
+apidoc_include_private = True
 apidoc_separate_modules = True
+
+autodoc_typehints = 'description'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -63,8 +90,10 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 # The master toctree document.
 master_doc = 'index'
