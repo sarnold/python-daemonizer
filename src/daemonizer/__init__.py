@@ -71,6 +71,9 @@ class Daemon:
         self.use_cleanup = use_cleanup
 
     def log(self, *args):
+        """
+        Small bit of self debug.
+        """
         if self.verbose >= 1:
             print(*args)
 
@@ -89,7 +92,7 @@ class Daemon:
                 # Exit first parent
                 sys.exit(0)
         except OSError as e:
-            sys.stderr.write("fork #1 failed: %d (%s)\n" % (e.errno, e.strerror))
+            sys.stderr.write(f"fork #1 failed: {e.errno} ({e.strerror})\n")
             sys.exit(1)
 
         # Decouple from parent environment
@@ -104,7 +107,7 @@ class Daemon:
                 # Exit from second parent
                 sys.exit(0)
         except OSError as e:
-            sys.stderr.write("fork #2 failed: %d (%s)\n" % (e.errno, e.strerror))
+            sys.stderr.write(f"fork #2 failed: {e.errno} ({e.strerror})\n")
             sys.exit(1)
 
         if sys.platform != 'darwin':  # This block breaks on OS X
