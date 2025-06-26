@@ -28,7 +28,7 @@ Define a class which inherits from ``Daemon`` and has a ``run()`` method
 
 .. code-block:: python
 
-  from daemon import Daemon
+  from daemonizer import Daemon
 
 
   class pantalaimon(Daemon):

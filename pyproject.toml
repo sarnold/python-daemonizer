@@ -1,9 +1,82 @@
 [build-system]
 requires = [
-    "setuptools>=45",
+    "setuptools>=61",
     "setuptools_scm[toml]>=6.2",
 ]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "daemonizer"
+description = "Python daemonizer for Unix, Linux and OS X"
+dynamic = ["version"]
+readme = "README.rst"
+license = "CC-BY-SA-3.0"  # >=3.9 only
+
+authors = [
+    {name = "Stephen Arnold"},
+    {email = "stephen.arnold42@gmail.com"},
+]
+
+keywords = ["daemon", "daemonize", "server"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Operating System :: Unix",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: MacOS :: MacOS X",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Testing",
+    "Environment :: No Input/Output (Daemon)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+# dependencies = []
+
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = [
+    "flake8",
+    "isort",
+    "mypy>=0.990",
+    "black >= 22.3.0",
+    "pylint >= 3.1.0",
+]
+cov = [
+    "coverage[toml]",
+    "coverage_python_version",
+]
+doc = [
+    "sphinx",
+    "sphinx_git",
+    "sphinxcontrib.apidoc",
+    "myst-parser",
+    "sphinx-nefertiti",
+    "sphinx_rtd_theme<3.0.0",
+]
+test = [
+    "pytest",
+    "pytest-cov",
+]
+events = [
+    "gevent",
+    "eventlet",
+]
+
+[project.urls]
+Homepage = "https://github.com/sarnold/python-daemonizer"
+Repository = "https://github.com/sarnold/python-daemonizer.git"
+Issues = "https://github.com/sarnold/python-daemonizer/issues"
+Changelog = "https://github.com/sarnold/python-daemonizer/blob/master/CHANGELOG.rst"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
 
 [tool.setuptools_scm]
 
@@ -14,10 +87,14 @@ log_cli =  false
 doctest_optionflags = ["ELLIPSIS", "NORMALIZE_WHITESPACE",]
 addopts = "--strict-markers"
 markers = "subscript"
+filterwarnings = [
+    "ignore:currentThread:DeprecationWarning",
+    "ignore:co_lnotab:DeprecationWarning",
+]
 
 [tool.coverage.run]
 branch = true
-source = ["daemon"]
+source = ["src"]
 omit = [
     "test",
     ".tox",
@@ -27,7 +104,7 @@ plugins = [
 ]
 
 [tool.coverage.paths]
-source = ["daemon"]
+source = ["src"]
 
 [tool.coverage.report]
 fail_under = 70
