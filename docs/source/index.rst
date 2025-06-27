@@ -1,5 +1,5 @@
-Welcome to the daemonizer documentation!
-========================================
+Python daemonizer docs
+======================
 
 .. git_commit_detail::
     :branch:
@@ -12,9 +12,9 @@ Welcome to the daemonizer documentation!
    :caption: Contents:
    :maxdepth: 3
 
-   README.rst
+   README
    api/modules
-   CHANGELOG.rst
+   CHANGELOG
 
 
 Indices and tables

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Configure logging helper function with correct UTC name.
 """
@@ -22,7 +21,9 @@ def setup_logging(debug, filename, modname=None):
     if not modname:
         my_fmt = '%(asctime)s %(levelname)s %(name)s.%(funcName)s(%(lineno)d) %(message)s'
     else:
-        my_fmt = '%(asctime)s %(levelname)s %(mod_name)s.%(funcName)s(%(lineno)d) %(message)s'
+        my_fmt = (
+            '%(asctime)s %(levelname)s %(mod_name)s.%(funcName)s(%(lineno)d) %(message)s'
+        )
 
         default_factory = logging.getLogRecordFactory()
 

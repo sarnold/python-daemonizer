@@ -5,7 +5,8 @@ on:
   workflow_call:
   pull_request:
   push:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
   python_wheels:

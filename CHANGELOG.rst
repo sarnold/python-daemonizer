@@ -2,7 +2,28 @@ Changelog
 =========
 
 
-1.0.0 (2024-12-24)
+1.1.0 (2025-06-26)
+------------------
+
+Changes
+~~~~~~~
+- Update workflows, add container workflow to test rpms. [Stephen L
+  Arnold]
+
+  * add a tox dev environment, remove .spec from gitignore
+- Still more cleanup in docs config and index. [Stephen L Arnold]
+- Migrate package metadata to pyproject.toml, update project files.
+  [Stephen L Arnold]
+
+  * update readme, pre-commit, and tox files
+  * remove MANIFEST.in and setup.cfg
+
+Fixes
+~~~~~
+- Cleanup test imports and lint, update tox config. [Stephen L Arnold]
+
+
+1.0.0 (2025-03-24)
 ------------------
 
 New

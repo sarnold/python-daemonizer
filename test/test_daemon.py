@@ -5,8 +5,8 @@ import test.settings as s
 import time
 import unittest
 
-from daemon import Daemon
-from daemon.parent_logger import setup_logging
+from daemonizer import Daemon
+from daemonizer.parent_logger import setup_logging
 
 if s.DEBUG:
     debug = True
