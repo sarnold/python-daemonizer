@@ -277,7 +277,7 @@ specifications.
     :target: https://github.com/sarnold/python-daemonizer/releases
     :alt: GitHub tag
 
-.. |python| image:: https://img.shields.io/badge/python-3.6+-blue.svg
+.. |python| image:: https://img.shields.io/badge/python-3.9+-blue.svg
     :target: https://www.python.org/downloads/
     :alt: Python
 

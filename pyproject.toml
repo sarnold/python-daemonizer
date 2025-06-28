@@ -75,8 +75,8 @@ Repository = "https://github.com/sarnold/python-daemonizer.git"
 Issues = "https://github.com/sarnold/python-daemonizer/issues"
 Changelog = "https://github.com/sarnold/python-daemonizer/blob/master/CHANGELOG.rst"
 
-[tool.setuptools]
-package-dir = {"" = "src"}
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.setuptools_scm]
 version_file = "src/daemonizer/_version.py"
