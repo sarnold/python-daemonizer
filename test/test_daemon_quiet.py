@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
-import test.settings as s
 import time
 import unittest
+from test import settings as s
 
 from daemonizer import Daemon
 from daemonizer.parent_logger import setup_logging

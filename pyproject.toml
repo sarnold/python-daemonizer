@@ -1,7 +1,7 @@
 [build-system]
 requires = [
-    "setuptools>=61",
-    "setuptools_scm[toml]>=6.2",
+    "setuptools",
+    "setuptools_scm[toml]",
 ]
 build-backend = "setuptools.build_meta"
 
@@ -79,6 +79,7 @@ Changelog = "https://github.com/sarnold/python-daemonizer/blob/master/CHANGELOG.
 package-dir = {"" = "src"}
 
 [tool.setuptools_scm]
+version_file = "src/daemonizer/_version.py"
 
 [tool.pytest.ini_options]
 minversion = "6.0"

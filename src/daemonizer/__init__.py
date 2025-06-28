@@ -21,12 +21,8 @@ import sys
 import time
 from datetime import timezone
 
-if sys.version_info < (3, 8):
-    from importlib_metadata import version
-else:
-    from importlib.metadata import version
+from ._version import version
 
-VERSION = version('daemonizer')
 UTC = datetime.datetime.now(timezone.utc)
 
 
@@ -34,7 +30,7 @@ def timestamp():
     """
     Make a UTC timestamp.
     """
-    sys.stdout.write(f'\nTIMESTAMP v{VERSION}: ')
+    sys.stdout.write(f'\nTIMESTAMP v{version}: ')
     sys.stdout.write('{:%Y-%m-%d %H:%M:%S %Z}\n'.format(UTC))
 
 
