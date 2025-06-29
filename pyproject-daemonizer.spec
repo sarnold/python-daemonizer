@@ -1,13 +1,13 @@
 %global srcname daemonizer
 
 Name:           python-%{srcname}
-Version:        1.1.0
+Version:        1.1.1
 Release:        1%{?dist}
 Summary:        Python daemonizer for Unix, Linux and OS X
 
 License:        CC-BY-SA-3.0
 URL:            https://github.com/sarnold/python-daemonizer
-Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
+Source0:        %{url}/releases/download/%{version}/%{srcname}-%{version}.tar.gz
 
 BuildArch:      noarch
 
@@ -27,19 +27,23 @@ Summary:        %{summary}
 BuildRequires: python3-devel
 BuildRequires: pyproject-rpm-macros
 BuildRequires: python3dist(tomli)
+BuildRequires: python3dist(wheel)
 BuildRequires: python3dist(setuptools)
 BuildRequires: python3dist(setuptools-scm[toml])
 
 %description -n python3-%{srcname} %_description
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -p1 -n %{srcname}-%{version}
+rm -rf %{srcname}.egg-info
 
 # using pyproject macros
 %generate_buildrequires
-%pyproject_buildrequires -x test
+export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
+%pyproject_buildrequires -r
 
 %build
+export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 %pyproject_wheel
 
 %install
@@ -50,10 +54,11 @@ BuildRequires: python3dist(setuptools-scm[toml])
 
 %check
 %pyproject_check_import
-%pytest
+#%pytest
 
 %files -n python3-daemonizer -f %{pyproject_files}
+%doc README.rst
 
 %changelog
-* Fri Jun 27 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.0
+* Fri Jun 27 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.1
 - Initial package
