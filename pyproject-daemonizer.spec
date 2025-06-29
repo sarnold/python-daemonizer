@@ -27,6 +27,7 @@ Summary:        %{summary}
 BuildRequires: python3-devel
 BuildRequires: pyproject-rpm-macros
 BuildRequires: python3dist(tomli)
+BuildRequires: python3dist(wheel)
 BuildRequires: python3dist(setuptools)
 BuildRequires: python3dist(setuptools-scm[toml])
 
@@ -39,7 +40,7 @@ rm -rf %{srcname}.egg-info
 # using pyproject macros
 %generate_buildrequires
 export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
-%pyproject_buildrequires -p
+%pyproject_buildrequires -r
 
 %build
 export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}

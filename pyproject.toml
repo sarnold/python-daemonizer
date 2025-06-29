@@ -79,6 +79,7 @@ Changelog = "https://github.com/sarnold/python-daemonizer/blob/master/CHANGELOG.
 where = ["src"]
 
 [tool.setuptools_scm]
+version_scheme = "no-guess-dev"
 version_file = "src/daemonizer/_version.py"
 
 [tool.pytest.ini_options]
