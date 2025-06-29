@@ -1,7 +1,11 @@
 %global srcname daemonizer
 
+# Tests are disabled in RHEL 9 because really old tox
+# Specify --with tests to enable them.
+%bcond_with tests
+
 Name:           python-%{srcname}
-Version:        1.1.1
+Version:        1.1.2
 Release:        1%{?dist}
 Summary:        Python daemonizer for Unix, Linux and OS X
 
@@ -35,12 +39,11 @@ BuildRequires: python3dist(setuptools-scm[toml])
 
 %prep
 %autosetup -p1 -n %{srcname}-%{version}
-rm -rf %{srcname}.egg-info
 
 # using pyproject macros
 %generate_buildrequires
 export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
-%pyproject_buildrequires -r
+%pyproject_buildrequires
 
 %build
 export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
@@ -54,11 +57,13 @@ export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 
 %check
 %pyproject_check_import
-#%pytest
+%if %{with tests}
+%pytest -vv test/
+%endif
 
 %files -n python3-daemonizer -f %{pyproject_files}
 %doc README.rst
 
 %changelog
-* Fri Jun 27 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.1
+* Sun Jun 29 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.2
 - Initial package

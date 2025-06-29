@@ -3,13 +3,19 @@ import os
 import sys
 import time
 import unittest
-from test import settings as s
+
+from pathlib import Path
 
 from daemonizer import Daemon
 from daemonizer.parent_logger import setup_logging
 
-if s.DEBUG:
-    debug = True
+
+class Settings:
+    def __init__(self):
+        self.DEBUG = True
+        self.HOMEDIR = './'
+        self.LOGFILE = 'testing_daemon.log'
+        self.PIDFILE = 'testing_daemon.pid'
 
 
 class TDaemon(Daemon):
@@ -88,6 +94,11 @@ class TestDaemon(unittest.TestCase):
             control_daemon('stop')
         time.sleep(0.05)
         os.system('rm testing_daemon*')
+
+
+s = Settings()
+if s.DEBUG:
+    debug = True
 
 
 if __name__ == '__main__':

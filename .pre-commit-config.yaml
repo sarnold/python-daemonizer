@@ -2,7 +2,7 @@
 #   pre-commit install
 # To update the pre-commit hooks run:
 #   pre-commit install-hooks
-exclude: '^(.tox/|docs/|^setup.py$)'
+exclude: '^(.tox/|docs/|test/|^setup.py$)'
 repos:
   - repo: meta
     hooks:
