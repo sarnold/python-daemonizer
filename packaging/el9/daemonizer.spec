@@ -5,7 +5,7 @@
 %bcond_with tests
 
 Name:           python-%{srcname}
-Version:        1.1.2
+Version:        VER_GOES_HERE
 Release:        1%{?dist}
 Summary:        Python daemonizer for Unix, Linux and OS X
 
