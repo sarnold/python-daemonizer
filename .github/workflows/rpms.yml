@@ -1,0 +1,85 @@
+name: RPM packages
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  get_version:
+    name: Get version info
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        shell: bash
+    outputs:
+      version: ${{ steps.git_ver.outputs.version }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get package version
+        id: git_ver
+        run: |
+          version=$(git describe --tags | sed -e "s|-g|+g|")
+          echo "Version from git: ${version}"
+          echo "version=${version}" >> $GITHUB_OUTPUT
+
+  build_rpms:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    needs: [get_version]
+
+    strategy:
+      fail-fast: false
+      matrix:
+        name: [
+          x64_centos9,
+        ]
+
+        include:
+          - name: x64_centos9
+            dist: el9
+
+    steps:
+      - name: Check github variables
+        env:
+          VERSION: ${{ needs.get_version.outputs.version }}
+        run: |
+          echo "Package version from git: ${VERSION}"
+
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: cnangel/build-rpm-action@master
+        id: rpm_build
+        env:
+          RPM_BUILD_OPTIONS: --nodebuginfo
+        with:
+          docker_image: "cnangel/${{ matrix.dist }}"
+          before_build_hook: |
+            spectool -g -R pyproject-daemonizer.spec
+            dnf config-manager --set-enabled crb
+            yum builddep --spec pyproject-daemonizer.spec
+          rpmbuild_opts: -ba
+
+      - name: Check package dirs
+        run: |
+          ls ${{ steps.rpm_build.outputs.rpm_dir_path }}
+          ls ${{ steps.rpm_build.outputs.srpm_dir_path }}
+
+      - name: Upload deb files
+        uses: actions/upload-artifact@v4
+        with:
+          name: "timew-addons_${{ needs.get_version.outputs.version }}-${{ matrix.dist }}"
+          path: |
+            ${{ steps.rpm_build.outputs.rpm_dir_path }}/*.rpm
