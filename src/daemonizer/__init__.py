@@ -1,4 +1,4 @@
-'''
+"""
 ***
 Modified generic daemon class
 ***
@@ -6,7 +6,7 @@ Modified generic daemon class
 Author:   http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/
 
 License:  http://creativecommons.org/licenses/by-sa/3.0/
-'''
+"""
 
 # Core modules
 from __future__ import print_function
