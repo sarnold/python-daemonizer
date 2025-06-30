@@ -3,9 +3,9 @@ name: RPM packages
 on:
   workflow_dispatch:
   workflow_call:
-  push:
-    branches: [ master ]
   pull_request:
+  #push:
+    #branches: [ master ]
 
 jobs:
   get_version:
@@ -36,7 +36,7 @@ jobs:
         id: git_ver
         run: |
           python -m pip install --upgrade setuptools_scm
-          version=$(python -m setuptools_scm | cut -d. -f-4)
+          version=$(python -m setuptools_scm | cut -d. -f-3)
           echo "Version from git: ${version}"
           echo "version=${version}" >> $GITHUB_OUTPUT
 
