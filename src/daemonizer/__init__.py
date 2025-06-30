@@ -21,16 +21,17 @@ import sys
 import time
 from datetime import timezone
 
-from ._version import version
+from ._version import version as version_full
 
 UTC = datetime.datetime.now(timezone.utc)
+VERSION = '.'.join(version_full.split('.', maxsplit=4)[:4])
 
 
 def timestamp():
     """
     Make a UTC timestamp.
     """
-    sys.stdout.write(f'\nTIMESTAMP v{version}: ')
+    sys.stdout.write(f'\nTIMESTAMP v{VERSION}: ')
     sys.stdout.write('{:%Y-%m-%d %H:%M:%S %Z}\n'.format(UTC))
 
 

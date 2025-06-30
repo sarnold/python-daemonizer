@@ -24,10 +24,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Add python requirements
+        run: |
+          python -m pip install --upgrade pip
+
       - name: Get package version
         id: git_ver
         run: |
-          version=$(git describe --tags | sed -e "s|-g|+g|")
+          python -m pip install --upgrade setuptools_scm
+          version=$(python -m setuptools_scm | cut -d. -f-4)
           echo "Version from git: ${version}"
           echo "version=${version}" >> $GITHUB_OUTPUT
 
@@ -50,15 +59,16 @@ jobs:
             dist: el9
 
     steps:
-      - name: Check github variables
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check version and update spec
         env:
           VERSION: ${{ needs.get_version.outputs.version }}
         run: |
           echo "Package version from git: ${VERSION}"
-
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+          sed -e s"|VER_GOES_HERE|${VERSION}|" packaging/el9/daemonizer.spec > daemonizer.spec
 
       - uses: cnangel/build-rpm-action@master
         id: rpm_build
@@ -67,9 +77,9 @@ jobs:
         with:
           docker_image: "cnangel/${{ matrix.dist }}"
           before_build_hook: |
-            spectool -g -R pyproject-daemonizer.spec
+            spectool -g -R daemonizer.spec
             dnf config-manager --set-enabled crb
-            yum -y builddep --spec pyproject-daemonizer.spec
+            yum -y builddep --spec daemonizer.spec
           rpmbuild_opts: -ba
 
       - name: Check package dirs
@@ -80,7 +90,7 @@ jobs:
       - name: Upload deb files
         uses: actions/upload-artifact@v4
         with:
-          name: "python3-daemonizer-${{ matrix.dist }}-rpms"
+          name: "python3-daemonizer-${{ needs.get_version.outputs.version }}.${{ matrix.dist }}-rpms"
           path: |
             ${{ steps.rpm_build.outputs.rpm_dir_path }}/*/*.rpm
             ${{ steps.rpm_build.outputs.srpm_dir_path }}/*.rpm
