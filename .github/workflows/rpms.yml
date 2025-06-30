@@ -42,11 +42,11 @@ jobs:
       fail-fast: false
       matrix:
         name: [
-          x64_centos9,
+          centos9,
         ]
 
         include:
-          - name: x64_centos9
+          - name: centos9
             dist: el9
 
     steps:
@@ -69,7 +69,7 @@ jobs:
           before_build_hook: |
             spectool -g -R pyproject-daemonizer.spec
             dnf config-manager --set-enabled crb
-            yum builddep --spec pyproject-daemonizer.spec
+            yum -y builddep --spec pyproject-daemonizer.spec
           rpmbuild_opts: -ba
 
       - name: Check package dirs
@@ -80,6 +80,7 @@ jobs:
       - name: Upload deb files
         uses: actions/upload-artifact@v4
         with:
-          name: "timew-addons_${{ needs.get_version.outputs.version }}-${{ matrix.dist }}"
+          name: "python3-daemonizer-${{ matrix.dist }}-rpms"
           path: |
-            ${{ steps.rpm_build.outputs.rpm_dir_path }}/*.rpm
+            ${{ steps.rpm_build.outputs.rpm_dir_path }}/*/*.rpm
+            ${{ steps.rpm_build.outputs.srpm_dir_path }}/*.rpm
