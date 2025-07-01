@@ -5,7 +5,7 @@
 %bcond_with tests
 
 Name:           python-%{srcname}
-Version:        1.1.2
+Version:        VER_GOES_HERE
 Release:        1%{?dist}
 Summary:        Python daemonizer for Unix, Linux and OS X
 
@@ -62,7 +62,8 @@ export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 %endif
 
 %files -n python3-daemonizer -f %{pyproject_files}
-%doc README.rst
+%doc README.rst CHANGELOG.rst
+%license LICENSES REUSE.toml
 
 %changelog
 * Sun Jun 29 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.2

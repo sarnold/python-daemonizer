@@ -2,7 +2,73 @@ Changelog
 =========
 
 
-1.1.0 (2025-06-26)
+1.1.3 (2025-06-30)
+------------------
+
+Changes
+~~~~~~~
+- Revert rpm workflow to release versioned rpm artifacts. [Stephen L
+  Arnold]
+
+  * pull this into release workflow and add artifacts
+  * needs new dev rpm workflow with a build script or makefile
+  * try rpm with licenses folder and reuse config
+- Use the post version format for rpm artifacts. [Stephen L Arnold]
+
+  * plain python .postN is a fedora-compatible format for version field
+  * use that to set the version in github rpms workflow artifacts
+
+Fixes
+~~~~~
+- Run the yum builddep cmd with yes, cleanup artifact bits. [Stephen L
+  Arnold]
+
+
+1.1.2 (2025-06-30)
+------------------
+
+New
+~~~
+- Add rpmbuild workflow for CI packages. [Stephen L Arnold]
+
+Changes
+~~~~~~~
+- Make sure dev versions sort correctly, cleanup spec bits. [Stephen L
+  Arnold]
+- Bump versions in spec and readme, switch to find namespace. [Stephen L
+  Arnold]
+
+Fixes
+~~~~~
+- Cleanup test imports and tox env, fix typo in setup.cfg. [Stephen L
+  Arnold]
+
+  * remove problematic test imports, use simple test class instead
+  * more spec file cleanup, update pre-commit to ignore test dir
+
+Other
+~~~~~
+- Fall back to setup.cfg for packaging metadata. [Stephen L Arnold]
+
+  * workaround for bug UNKNOWN 0.0.0
+  * https://github.com/pypa/setuptools/issues/3269
+
+
+1.1.1 (2025-06-28)
+------------------
+
+Changes
+~~~~~~~
+- Relax build deps, remove runtime version imports, rename spec.
+  [Stephen L Arnold]
+
+  * start generating a version file and refactor imports, cleanup tox envs
+- Add preliminary spec file for building rpms. [Stephen L Arnold]
+
+  * currently needs pyproject-rpm-macros from crb repos
+
+
+1.1.0 (2025-06-27)
 ------------------
 
 Changes
