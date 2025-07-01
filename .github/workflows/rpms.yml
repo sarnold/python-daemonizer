@@ -3,7 +3,7 @@ name: RPM packages
 on:
   workflow_dispatch:
   workflow_call:
-  pull_request:
+  #pull_request:
   #push:
     #branches: [ master ]
 
@@ -36,7 +36,7 @@ jobs:
         id: git_ver
         run: |
           python -m pip install --upgrade setuptools_scm
-          version=$(python -m setuptools_scm | cut -d. -f-3)
+          version=$(python -m setuptools_scm | cut -d. -f-4)
           echo "Version from git: ${version}"
           echo "version=${version}" >> $GITHUB_OUTPUT
 
@@ -84,8 +84,8 @@ jobs:
 
       - name: Check package dirs
         run: |
-          ls ${{ steps.rpm_build.outputs.rpm_dir_path }}
-          ls ${{ steps.rpm_build.outputs.srpm_dir_path }}
+          ls -R ${{ steps.rpm_build.outputs.rpm_dir_path }}
+          ls -R ${{ steps.rpm_build.outputs.srpm_dir_path }}
 
       - name: Upload deb files
         uses: actions/upload-artifact@v4
