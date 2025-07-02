@@ -1,6 +1,5 @@
 # Prepare variables
 TMP = $(CURDIR)/tmp
-# grep spec $(shell grep ^Version did.spec | sed 's/.* //')
 VERSION = $(shell git describe | sed -e "s/-\([0-9]*\).*/.post\1/")
 PACKAGE = daemonizer-$(VERSION)
 ifndef USERNAME
