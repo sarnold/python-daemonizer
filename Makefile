@@ -1,6 +1,12 @@
 # Prepare variables
+ifeq ($(TMP),)
 TMP = $(CURDIR)/tmp
-VERSION = $(shell git describe | sed -e "s/-\([0-9]*\).*/.post\1/")
+endif
+
+ifeq ($(VERSION),)
+VERSION := $(shell git describe | sed -e "s/-\([0-9]*\).*/.post\1/")
+endif
+
 PACKAGE = daemonizer-$(VERSION)
 ifndef USERNAME
     USERNAME = echo $$USER
@@ -38,6 +44,6 @@ srpm: tarball
 packages: rpm srpm
 
 clean:
-	rm daemonizer.spec
+	rm -f daemonizer.spec
 	rm -rf $(TMP)
 	rm -rf .cache .pytest_cache
