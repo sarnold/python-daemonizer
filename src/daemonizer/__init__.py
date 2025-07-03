@@ -24,7 +24,7 @@ from datetime import timezone
 from ._version import version as version_full
 
 UTC = datetime.datetime.now(timezone.utc)
-VERSION = '.'.join(version_full.split('.', maxsplit=4)[:4])
+VERSION = '.'.join(version_full.split('+', maxsplit=1)[:1])
 
 
 def timestamp():

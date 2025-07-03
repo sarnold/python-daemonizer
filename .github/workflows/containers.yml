@@ -27,7 +27,7 @@ jobs:
       - name: Get package version
         id: git_ver
         run: |
-          version=$(git describe --tags | sed -e "s|v||" -e "s|-g|+g|")
+          version=$(git describe --tags | sed -e "s/-\([0-9]*\).*/.post\1/")
           echo "Version from git: ${version}"
           echo "version=${version}" >> $GITHUB_OUTPUT
 

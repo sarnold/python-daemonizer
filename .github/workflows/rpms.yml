@@ -36,7 +36,7 @@ jobs:
         id: git_ver
         run: |
           python -m pip install --upgrade setuptools_scm
-          version=$(python -m setuptools_scm | cut -d. -f-4)
+          version=$(python -m setuptools_scm | cut -d+ -f1)
           echo "Version from git: ${version}"
           echo "version=${version}" >> $GITHUB_OUTPUT
 
