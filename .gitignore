@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # generated/user files
-src/daemonizer/_version.py
+_version.py
 tmp/
 
 # Distribution / packaging
