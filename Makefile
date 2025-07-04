@@ -4,7 +4,7 @@ TMP = $(CURDIR)/tmp
 endif
 
 ifeq ($(VERSION),)
-VERSION := $(shell git describe | sed -e "s/-\([0-9]*\).*/.post\1/")
+VERSION := $(shell git describe --tags | sed -e "s/-\([0-9]*\).*/.post\1/")
 endif
 
 PACKAGE = daemonizer-$(VERSION)
