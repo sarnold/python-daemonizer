@@ -1,8 +1,8 @@
-%global srcname daemonizer
-
 # Tests are disabled in RHEL 9 because really old tox
 # Specify --with tests to enable them.
 %bcond_with tests
+
+%global srcname daemonizer
 
 Name:           python-%{srcname}
 Version:        VER_GOES_HERE
@@ -15,27 +15,30 @@ Source0:        %{url}/releases/download/%{version}/%{srcname}-%{version}.tar.gz
 
 BuildArch:      noarch
 
-%global _description %{expand:
+BuildRequires: python%{python3_pkgversion}-devel
+BuildRequires: pyproject-rpm-macros
+BuildRequires: python%{python3_pkgversion}dist(tomli)
+BuildRequires: python%{python3_pkgversion}dist(wheel)
+BuildRequires: python%{python3_pkgversion}dist(setuptools)
+BuildRequires: python%{python3_pkgversion}dist(setuptools-scm[toml])
+%if %{with tests}
+BuildRequires:  python%{python3_pkgversion}dist(pytest)
+%endif
+
+%description
 A Python class to daemonize your Python script so it can continue
 running in the background. It works on Unix, Linux and OS X, creates a
 PID file and has standard commands (start, stop, restart) plus a
-foreground mode.}
+foreground mode.
 
-%description %_description
-
-%package -n python3-%{srcname}
+%package -n python%{python3_pkgversion}-%{srcname}
 Summary:        %{summary}
 
-# this does not work with pyproject_rpm_macros since RH 9.6 is way too old
-# to meet the current build requirement versions
-BuildRequires: python3-devel
-BuildRequires: pyproject-rpm-macros
-BuildRequires: python3dist(tomli)
-BuildRequires: python3dist(wheel)
-BuildRequires: python3dist(setuptools)
-BuildRequires: python3dist(setuptools-scm[toml])
-
-%description -n python3-%{srcname} %_description
+%description -n python%{python3_pkgversion}-%{srcname}
+A Python class to daemonize your Python script so it can continue
+running in the background. It works on Unix, Linux and OS X, creates a
+PID file and has standard commands (start, stop, restart) plus a
+foreground mode.
 
 %prep
 %autosetup -p1 -n %{srcname}-%{version}
@@ -61,7 +64,7 @@ export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 %pytest -vv test/
 %endif
 
-%files -n python3-daemonizer -f %{pyproject_files}
+%files -n python%{python3_pkgversion}-daemonizer -f %{pyproject_files}
 %doc README.rst CHANGELOG.rst
 %license LICENSES REUSE.toml
 
