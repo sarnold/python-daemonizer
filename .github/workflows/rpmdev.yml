@@ -93,18 +93,11 @@ jobs:
         restore-keys: |
           ${{ matrix.name }}-${{ env.cache-name }}-
 
-    - name: Generate the version file
-      run: |
-        python3 -m venv .venv
-        .venv/bin/pip3 install -U pip
-        .venv/bin/pip3 install -e .
-      env:
-        SETUPTOOLS_SCM_PRETEND_VERSION: ${{ needs.get_version.outputs.version }}
-
-    - name: Build bdist_rpm pkgs
+    - name: Build rpm pkgs
       run: |
         make packages
       env:
+        SETUPTOOLS_SCM_PRETEND_VERSION: ${{ needs.get_version.outputs.version }}
         VERSION: ${{ needs.get_version.outputs.version }}
 
     - name: Upload rpm files

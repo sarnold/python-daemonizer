@@ -2,7 +2,58 @@ Changelog
 =========
 
 
-1.1.3 (2025-06-30)
+1.1.5 (2025-09-04)
+------------------
+
+Fixes
+~~~~~
+- Update packaging and spec file, simplify version cfg. [Stephen L
+  Arnold]
+
+  * no .git folder in container, export pretend in GH env
+
+
+1.1.4 (2025-08-18)
+------------------
+
+New
+~~~
+- Add github dev rpm package workflow, upload artifacts. [Stephen L
+  Arnold]
+- Add makefile for rpm dev workflows, update gitignore and tox. [Stephen
+  L Arnold]
+
+  * note the makefile requires rpmbuild command for actually building
+    anything, but creating versioned spec file and rpm source tarball
+    still works fine
+
+Changes
+~~~~~~~
+- Refactor spec file to use python3_pkgversion macro. [Stephen L Arnold]
+
+  * cleanup version and description bits
+  * add pip caching to rpms workflow
+  * cleanup pyproject.toml setuptools-scm constraints
+- Use post-release version scheme, adjust version munging. [Stephen L
+  Arnold]
+
+  * also ignore version file in both coverage and pylint
+- Force spec using only version from previous job. [Stephen L Arnold]
+
+  * update makefile to take VERSION insted of git, generate version file
+  * update rpms action workflow to take advantage of makefile
+
+Fixes
+~~~~~
+- Apply the proper fix for setuptools/setuptools-scm packaging. [Stephen
+  L Arnold]
+- Avoid version bug, pin max version of setuptools-scm to <9.2. [Stephen
+  L Arnold]
+
+  * pending resolution of upstream issue #1213
+
+
+1.1.3 (2025-07-01)
 ------------------
 
 Changes

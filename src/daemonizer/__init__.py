@@ -21,8 +21,12 @@ import sys
 import time
 from datetime import timezone
 
-from ._version import version as version_full
+if sys.version_info < (3, 8):
+    from importlib_metadata import version
+else:
+    from importlib.metadata import version
 
+version_full = version('daemonizer')
 UTC = datetime.datetime.now(timezone.utc)
 VERSION = '.'.join(version_full.split('+', maxsplit=1)[:1])
 

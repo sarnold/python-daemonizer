@@ -15,12 +15,12 @@ Source0:        %{url}/releases/download/%{version}/%{srcname}-%{version}.tar.gz
 
 BuildArch:      noarch
 
-BuildRequires: python%{python3_pkgversion}-devel
-BuildRequires: pyproject-rpm-macros
-BuildRequires: python%{python3_pkgversion}dist(tomli)
-BuildRequires: python%{python3_pkgversion}dist(wheel)
-BuildRequires: python%{python3_pkgversion}dist(setuptools)
-BuildRequires: python%{python3_pkgversion}dist(setuptools-scm[toml])
+BuildRequires:  python%{python3_pkgversion}-devel
+BuildRequires:  pyproject-rpm-macros
+BuildRequires:  python%{python3_pkgversion}dist(tomli)
+BuildRequires:  python%{python3_pkgversion}dist(wheel)
+BuildRequires:  python%{python3_pkgversion}dist(setuptools)
+BuildRequires:  python%{python3_pkgversion}dist(setuptools-scm[toml])
 %if %{with tests}
 BuildRequires:  python%{python3_pkgversion}dist(pytest)
 %endif
@@ -45,17 +45,16 @@ foreground mode.
 
 # using pyproject macros
 %generate_buildrequires
-export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 %pyproject_buildrequires
 
 %build
-export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 %pyproject_wheel
 
 %install
 %pyproject_install
 
 # Use -l to assert a %%license file is found (PEP 639).
+# note the last argument is the top-level module directory name
 %pyproject_save_files -l daemonizer
 
 %check
@@ -69,5 +68,11 @@ export SETUPTOOLS_SCM_PRETEND_VERSION=%{version}
 %license LICENSES REUSE.toml
 
 %changelog
-* Sun Jun 29 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.2
+* Wed Sep 04 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.5
+- Update packaging and build env, stop generating version file
+* Wed Sep 03 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.4
+- Pick up previous release, test packaging
+* Sat Jul 12 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.3
+- Bump package release number for spec change
+* Sat Jul 12 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.3
 - Initial package
