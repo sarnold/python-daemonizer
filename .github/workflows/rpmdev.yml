@@ -101,7 +101,7 @@ jobs:
         VERSION: ${{ needs.get_version.outputs.version }}
 
     - name: Upload rpm files
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: "daemonizer-${{ needs.get_version.outputs.version }}.${{ matrix.name }}-rpms"
         path: |

@@ -141,7 +141,7 @@ jobs:
       env:
         SETUPTOOLS_SCM_PRETEND_VERSION: ${{ needs.get_version.outputs.version }}
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v5
       if: matrix.image == 'rockylinux:9'
       with:
         name: bdist_rpms
