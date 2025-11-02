@@ -308,7 +308,7 @@ class Daemon:
             logging.debug('Process is stopped')
             return False
         if os.path.exists(f'/proc/{pid}'):
-            logging.info('Process (pid %d) is running...', pid)
+            logging.debug('Process (pid %d) is running...', pid)
             return True
         logging.debug('Process (pid %d) is killed', pid)
         return False
