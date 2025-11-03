@@ -2,6 +2,25 @@ Changelog
 =========
 
 
+1.1.7 (2025-11-03)
+------------------
+
+Changes
+~~~~~~~
+- Reset logging level in is_running() to info. [Stephen L Arnold]
+
+
+1.1.6 (2025-11-02)
+------------------
+
+Changes
+~~~~~~~
+- Make sure all logging calls are debug in self.is_running. [Stephen L
+  Arnold]
+
+  * aligns with overall logging config cleanup in pyserv
+
+
 1.1.5 (2025-09-04)
 ------------------
 
@@ -10,7 +29,9 @@ Fixes
 - Update packaging and spec file, simplify version cfg. [Stephen L
   Arnold]
 
-  * no .git folder in container, export pretend in GH env
+  * no more version file or exports in the spec file
+  * no .git folder in container, so export pretend in GH env
+  * update changelog
 
 
 1.1.4 (2025-08-18)
