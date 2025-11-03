@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Daemonizer Class &mdash; daemonizer 1.1.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=370aedac"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="daemonizer" href="api/modules.html" />
+    <link rel="prev" title="Python daemonizer docs" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            daemonizer
+          </a>
+              <div class="version">
+                1.1.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python Daemonizer Class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actions">Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#foreground">Foreground</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#continuous-execution">Continuous execution</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#consumer-examples">Consumer examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#install-with-pip">Install with pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-commit">Pre-commit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sbom-and-license-info">SBOM and license info</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">daemonizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">daemonizer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python Daemonizer Class</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-daemonizer-class">
+<h1>Python Daemonizer Class<a class="headerlink" href="#python-daemonizer-class" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/ci.yml"><img alt="CI Status" src="https://github.com/sarnold/python-daemonizer/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/wheels.yml"><img alt="Wheel Status" src="https://github.com/sarnold/python-daemonizer/actions/workflows/wheels.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml"><img alt="Release Status" src="https://github.com/sarnold/python-daemonizer/actions/workflows/release.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml"><img alt="Pylint Status" src="https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/coverage.yml"><img alt="Coverage workflow" src="https://github.com/sarnold/python-daemonizer/actions/workflows/coverage.yml/badge.svg" /></a></p>
+<p><a class="reference external" href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white" /></a> <a class="reference external" href="https://api.reuse.software/info/git.fsfe.org/reuse/api"><img alt="REUSE status" src="https://api.reuse.software/badge/git.fsfe.org/reuse/api" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/"><img alt="Test coverage" src="https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/test-coverage.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/actions/workflows/pylint.yml"><img alt="Pylint score" src="https://raw.githubusercontent.com/sarnold/python-daemonizer/badges/master/pylint-score.svg" /></a></p>
+<p><a class="reference external" href="https://github.com/sarnold/python-daemonizer/releases"><img alt="GitHub tag" src="https://img.shields.io/github/v/tag/sarnold/python-daemonizer?color=green&amp;include_prereleases&amp;label=latest%20release" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-CC--BY--SA--3.0-blue" /></a> <a class="reference external" href="https://www.python.org/downloads/"><img alt="Python" src="https://img.shields.io/badge/python-3.9+-blue.svg" /></a> <a class="reference external" href="https://github.com/sarnold/python-daemonizer/"><img alt="Platform" src="https://img.shields.io/badge/platforms-POSIX-blue.svg" /></a></p>
+<p>This is a Python class that will daemonize your Python script so it can
+continue running in the background. It works on Unix, Linux and OS X,
+creates a PID file and has standard commands (start, stop, restart) plus
+a foreground mode.</p>
+<p>Based on <a class="reference external" href="http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/">this original version from jejik.com</a>.</p>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h3>
+<p>Define a class which inherits from <code class="docutils literal notranslate"><span class="pre">Daemon</span></code> and has a <code class="docutils literal notranslate"><span class="pre">run()</span></code> method
+(which is what will be called once the daemonization is completed).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">daemonizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Daemon</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">pantalaimon</span><span class="p">(</span><span class="n">Daemon</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">do_mything</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Depending on what your code is doing, you may also want to subclass the
+<code class="docutils literal notranslate"><span class="pre">cleanup()</span></code> method to close sockets, etc (called after <code class="docutils literal notranslate"><span class="pre">stop()</span></code> and
+before termination).</p>
+<p>Create a new object of your class, specifying where you want your PID
+file to exist:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pineMarten</span> <span class="o">=</span> <span class="n">pantalaimon</span><span class="p">(</span><span class="s2">&quot;/path/to/pid.pid&quot;</span><span class="p">)</span>
+<span class="n">pineMarten</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code> - start the daemon (create PID and daemonize)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stop</span></code> - stop the daemon (stop the child process and remove the PID)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restart</span></code> - run <code class="docutils literal notranslate"><span class="pre">stop</span></code> then <code class="docutils literal notranslate"><span class="pre">start</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code> - show daemon status</p></li>
+</ul>
+</section>
+<section id="foreground">
+<h3>Foreground<a class="headerlink" href="#foreground" title="Link to this heading"></a></h3>
+<p>This is useful for debugging because you can start the code without
+making it a daemon. The running script then depends on the open shell
+like any normal Python script.</p>
+<p>To do this, just call the <code class="docutils literal notranslate"><span class="pre">run()</span></code> method directly instead of <code class="docutils literal notranslate"><span class="pre">start()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pineMarten</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="continuous-execution">
+<h3>Continuous execution<a class="headerlink" href="#continuous-execution" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">run()</span></code> method will be executed just once so if you want the
+daemon to be doing stuff continuously you may wish to use the <a class="reference external" href="https://pypi.org/project/schedule/">schedule</a>
+module to execute code snippets repeatedly (<a class="reference external" href="https://schedule.readthedocs.io/en/stable/examples.html">examples</a>). For daemon
+examples see the next section.</p>
+<section id="consumer-examples">
+<h4>Consumer examples<a class="headerlink" href="#consumer-examples" title="Link to this heading"></a></h4>
+<p><a class="reference external" href="https://github.com/sarnold/pyserv">Pyserv</a> is a growing collection of threaded Python server bits, including
+custom <a class="reference external" href="https://docs.python.org/3/library/http.server.html">HTTP server</a> and <a class="reference external" href="https://docs.python.org/3/library/wsgiref.html">WSGI</a> classes, along with corresponding console
+entry points and some daemon scripts. The latest addition includes an async
+version of the original tftpy-based daemon script.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">httpdaemon</span></code>, <code class="docutils literal notranslate"><span class="pre">atftpdaemon</span></code>, and <code class="docutils literal notranslate"><span class="pre">tftpdaemon</span></code> commands are
+stand-alone <a class="reference external" href="https://github.com/sarnold/python-daemonizer">Python daemon</a> scripts with the same core server code, as
+well as a default user configuration adjustable via environment
+variables.</p>
+</section>
+</section>
+<section id="install-with-pip">
+<h3>Install with pip<a class="headerlink" href="#install-with-pip" title="Link to this heading"></a></h3>
+<p>This updated version is <em>not</em> published on PyPI, thus use one of the
+following commands to install the latest python-daemonizer in a Python
+virtual environment on any platform.</p>
+<p>From source:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 -m venv env
+$ source env/bin/activate
+$ pip install git+https://github.com/sarnold/python-daemonizer.git
+</pre></div>
+</div>
+<p>The alternative to python venv is the <a class="reference external" href="https://github.com/tox-dev/tox">Tox</a> test driver.  If you have it
+installed already, clone this repository and try the following commands
+from the python-daemonizer source directory.</p>
+<p>To install in dev mode and run the tests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -e py
+</pre></div>
+</div>
+<p>To run pylint:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -e lint
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>After installing in dev mode, use the environment created by
+Tox just like any other Python virtual environment.  The dev
+install mode of Pip allows you to edit the script and run it
+again while inside the virtual environment. By default Tox
+environments are created under <code class="docutils literal notranslate"><span class="pre">.tox/</span></code> and named after the
+env argument (eg, py).</p>
+</div>
+<p>To install the latest release, eg with your own <code class="docutils literal notranslate"><span class="pre">tox.ini</span></code> file in
+another project, use something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install https://github.com/sarnold/python-daemonizer/releases/download/0.4.0/daemonizer-0.4.0-py3-none-any.whl
+</pre></div>
+</div>
+<p>That said, the “proper” form for git-based dependencies would be more like
+this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">daemonizer</span> <span class="o">@</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sarnold</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">daemonizer</span><span class="o">.</span><span class="n">git</span><span class="o">@</span><span class="mf">0.4.1</span><span class="c1">#69d4c9b6f3916cd5ae87c8b3a78eca1015eeed0f</span>
+</pre></div>
+</div>
+</section>
+<section id="pre-commit">
+<h3>Pre-commit<a class="headerlink" href="#pre-commit" title="Link to this heading"></a></h3>
+<p>This repo is now <a class="reference external" href="https://pre-commit.com/index.html">pre-commit</a> enabled for python/rst source and file-type
+linting. The checks run automatically on commit and will fail the commit
+(if not clean) and perform simple file corrections.  For example, if the
+mypy check fails on commit, you must first fix any fatal errors for the
+commit to succeed. That said, pre-commit does nothing if you don’t install
+it first (both the program itself and the hooks in your local repository
+copy).</p>
+<p>You will need to install pre-commit before contributing any changes;
+installing it using your system’s package manager is recommended,
+otherwise install with pip into your usual virtual environment using
+something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo emerge pre-commit  --or--
+$ pip install pre-commit
+</pre></div>
+</div>
+<p>then install it into the repo you just cloned:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/sarnold/python-daemonizer
+$ cd python-daemonizer/
+$ pre-commit install
+</pre></div>
+</div>
+<p>It’s usually a good idea to update the hooks to the latest version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit autoupdate
+</pre></div>
+</div>
+<p>Most (but not all) of the pre-commit checks will make corrections for you,
+however, some will only report errors, so these you will need to correct
+manually.</p>
+<p>Automatic-fix checks include ffffff, isort, autoflake, and miscellaneous
+file fixers. If any of these fail, you can review the changes with
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> and just add them to your commit and continue.</p>
+<p>If any of the mypy, bandit, or rst source checks fail, you will get a report,
+and you must fix any errors before you can continue adding/committing.</p>
+<p>To see a “replay” of any <code class="docutils literal notranslate"><span class="pre">rst</span></code> check errors, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit run rst-backticks -a
+$ pre-commit run rst-directive-colons -a
+$ pre-commit run rst-inline-touching-normal -a
+</pre></div>
+</div>
+<p>To run all <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> checks manually, try:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit run -a
+</pre></div>
+</div>
+</section>
+</section>
+<section id="sbom-and-license-info">
+<h2>SBOM and license info<a class="headerlink" href="#sbom-and-license-info" title="Link to this heading"></a></h2>
+<p>This project is now compliant with the REUSE Specification Version 3.3, so the
+corresponding license information for all files can be found in the <code class="docutils literal notranslate"><span class="pre">REUSE.toml</span></code>
+configuration file with license text(s) in the <code class="docutils literal notranslate"><span class="pre">LICENSES/</span></code> folder.</p>
+<p>Related metadata can be (re)generated with the following tools and command
+examples.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/fsfe/reuse-tool">reuse-tool</a> - <a class="reference external" href="https://reuse.software/spec-3.3/">REUSE</a> compliance linting and sdist (source files) SBOM generation</p></li>
+<li><p><a class="reference external" href="https://github.com/anthonyharrison/sbom4python">sbom4python</a> - generate SBOM with full dependency chain</p></li>
+</ul>
+<section id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h3>
+<p>Use tox to create the environment and run the lint command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -e reuse                      # --or--
+$ tox -e reuse -- spdx &gt; sbom.txt   # generate sdist files sbom
+</pre></div>
+</div>
+<p>Note you can pass any of the other reuse commands after the <code class="docutils literal notranslate"><span class="pre">--</span></code> above.</p>
+<p>Use the above environment to generate the full SBOM in text format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source .tox/reuse/bin/activate
+$ sbom4python --system --use-pip -o &lt;file_name&gt;.txt
+</pre></div>
+</div>
+<p>Be patient; the last command above may take several minutes. See the
+doc links above for more detailed information on the tools and
+specifications.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Python daemonizer docs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/modules.html" class="btn btn-neutral float-right" title="daemonizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 - 2025 Stephen Arnold.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

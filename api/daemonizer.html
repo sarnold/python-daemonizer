@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>daemonizer package &mdash; daemonizer 1.1.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=370aedac"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="daemonizer.parent_logger module" href="daemonizer.parent_logger.html" />
+    <link rel="prev" title="daemonizer" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            daemonizer
+          </a>
+              <div class="version">
+                1.1.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">Python Daemonizer Class</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">daemonizer</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">daemonizer package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="daemonizer.parent_logger.html">daemonizer.parent_logger module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-daemonizer">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#daemonizer.Daemon"><code class="docutils literal notranslate"><span class="pre">Daemon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#daemonizer.timestamp"><code class="docutils literal notranslate"><span class="pre">timestamp()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">daemonizer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">daemonizer</a></li>
+      <li class="breadcrumb-item active">daemonizer package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/daemonizer.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="daemonizer-package">
+<h1>daemonizer package<a class="headerlink" href="#daemonizer-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="daemonizer.parent_logger.html">daemonizer.parent_logger module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="daemonizer.parent_logger.html#daemonizer.parent_logger.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-daemonizer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-daemonizer" title="Link to this heading"></a></h2>
+<p><strong>*
+Modified generic daemon class
+*</strong></p>
+<p>Author:   <a class="reference external" href="http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/">http://www.jejik.com/articles/2007/02/a_simple_unix_linux_daemon_in_python/</a></p>
+<p>License:  <a class="reference external" href="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="daemonizer.Daemon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">daemonizer.</span></span><span class="sig-name descname"><span class="pre">Daemon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pidfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/dev/null'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stdout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/dev/null'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stderr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/dev/null'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">home_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">umask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_gevent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_eventlet</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_cleanup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A generic daemon class.</p>
+<p>Usage: subclass the Daemon class and override the run() method.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.cleanup">
+<span class="sig-name descname"><span class="pre">cleanup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.cleanup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.cleanup" title="Link to this definition"></a></dt>
+<dd><p>You should override this method if you need cleanup handlers on
+shutdown (ie, prior to sigterm handling) and set use_cleanup to
+<code class="docutils literal notranslate"><span class="pre">True</span></code> when you subclass Daemon().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.daemonize">
+<span class="sig-name descname"><span class="pre">daemonize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.daemonize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.daemonize" title="Link to this definition"></a></dt>
+<dd><p>Do the UNIX double-fork magic, see Stevens’ “Advanced Programming
+in the UNIX Environment” for details (ISBN 0201563177).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.delpid">
+<span class="sig-name descname"><span class="pre">delpid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.delpid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.delpid" title="Link to this definition"></a></dt>
+<dd><p>Remove PID file if they are us.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.get_pid">
+<span class="sig-name descname"><span class="pre">get_pid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.get_pid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.get_pid" title="Link to this definition"></a></dt>
+<dd><p>Get process ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return pid<span class="colon">:</span></dt>
+<dd class="field-odd"><p>daemon process ID</p>
+</dd>
+<dt class="field-even">Rtype int<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.is_running">
+<span class="sig-name descname"><span class="pre">is_running</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.is_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.is_running" title="Link to this definition"></a></dt>
+<dd><p>Check whether the server is running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if running, else False</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.log" title="Link to this definition"></a></dt>
+<dd><p>Small bit of self debug.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.restart">
+<span class="sig-name descname"><span class="pre">restart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.restart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.restart" title="Link to this definition"></a></dt>
+<dd><p>Restart the daemon</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.run" title="Link to this definition"></a></dt>
+<dd><p>You should override this method when you subclass Daemon.
+It will be called after the process has been
+daemonized by start() or restart().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.start" title="Link to this definition"></a></dt>
+<dd><p>Start the daemon</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.status">
+<span class="sig-name descname"><span class="pre">status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.status"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.status" title="Link to this definition"></a></dt>
+<dd><p>Get status from the daemon</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="daemonizer.Daemon.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#Daemon.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.Daemon.stop" title="Link to this definition"></a></dt>
+<dd><p>Stop the daemon</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="daemonizer.timestamp">
+<span class="sig-prename descclassname"><span class="pre">daemonizer.</span></span><span class="sig-name descname"><span class="pre">timestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/daemonizer.html#timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#daemonizer.timestamp" title="Link to this definition"></a></dt>
+<dd><p>Make a UTC timestamp.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="daemonizer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="daemonizer.parent_logger.html" class="btn btn-neutral float-right" title="daemonizer.parent_logger module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 - 2025 Stephen Arnold.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog &mdash; daemonizer 1.1.7 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=370aedac"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="daemonizer.parent_logger module" href="api/daemonizer.parent_logger.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            daemonizer
+          </a>
+              <div class="version">
+                1.1.7
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">Python Daemonizer Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">daemonizer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1.1.7 (2025-11-03)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#changes">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1.6 (2025-11-02)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">1.1.5 (2025-09-04)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fixes">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">1.1.4 (2025-08-18)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#new">New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">1.1.3 (2025-07-01)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">1.1.2 (2025-06-30)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other">Other</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">1.1.1 (2025-06-28)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">1.1.0 (2025-06-27)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id18">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id20">1.0.0 (2025-03-24)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id21">New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id24">0.4.1 (2024-12-24)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id25">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id27">0.4.0 (2023-09-20)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id28">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">Other</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id30">0.3.5 (2022-07-10)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id31">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id32">0.3.4 (2022-07-09)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id33">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id34">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id35">0.3.3 (2022-07-08)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id36">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id37">0.3.2 (2022-07-04)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id38">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id39">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id40">0.3.1 (2022-06-30)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id41">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id42">Fixes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id43">0.3.0 (2022-06-29)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id44">New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id45">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id46">Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id47">Other</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id48">0.2.3 (2020-03-13)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id49">0.2.2 (2020-03-01)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id50">0.2.1 (2019-12-17)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id51">0.2.0 (2019-12-17)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">daemonizer</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Changelog</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/CHANGELOG.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2>1.1.7 (2025-11-03)<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="changes">
+<h3>Changes<a class="headerlink" href="#changes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Reset logging level in is_running() to info. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>1.1.6 (2025-11-02)<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>Changes<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Make sure all logging calls are debug in self.is_running. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>aligns with overall logging config cleanup in pyserv</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id4">
+<h2>1.1.5 (2025-09-04)<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<section id="fixes">
+<h3>Fixes<a class="headerlink" href="#fixes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Update packaging and spec file, simplify version cfg. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>no more version file or exports in the spec file</p></li>
+<li><p>no .git folder in container, so export pretend in GH env</p></li>
+<li><p>update changelog</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h2>1.1.4 (2025-08-18)<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<section id="new">
+<h3>New<a class="headerlink" href="#new" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add github dev rpm package workflow, upload artifacts. [Stephen L
+Arnold]</p></li>
+<li><p>Add makefile for rpm dev workflows, update gitignore and tox. [Stephen
+L Arnold]</p>
+<ul>
+<li><p>note the makefile requires rpmbuild command for actually building
+anything, but creating versioned spec file and rpm source tarball
+still works fine</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h3>Changes<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Refactor spec file to use python3_pkgversion macro. [Stephen L Arnold]</p>
+<ul>
+<li><p>cleanup version and description bits</p></li>
+<li><p>add pip caching to rpms workflow</p></li>
+<li><p>cleanup pyproject.toml setuptools-scm constraints</p></li>
+</ul>
+</li>
+<li><p>Use post-release version scheme, adjust version munging. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>also ignore version file in both coverage and pylint</p></li>
+</ul>
+</li>
+<li><p>Force spec using only version from previous job. [Stephen L Arnold]</p>
+<ul>
+<li><p>update makefile to take VERSION insted of git, generate version file</p></li>
+<li><p>update rpms action workflow to take advantage of makefile</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id7">
+<h3>Fixes<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Apply the proper fix for setuptools/setuptools-scm packaging. [Stephen
+L Arnold]</p></li>
+<li><p>Avoid version bug, pin max version of setuptools-scm to &lt;9.2. [Stephen
+L Arnold]</p>
+<ul>
+<li><p>pending resolution of upstream issue #1213</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id8">
+<h2>1.1.3 (2025-07-01)<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<section id="id9">
+<h3>Changes<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Revert rpm workflow to release versioned rpm artifacts. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>pull this into release workflow and add artifacts</p></li>
+<li><p>needs new dev rpm workflow with a build script or makefile</p></li>
+<li><p>try rpm with licenses folder and reuse config</p></li>
+</ul>
+</li>
+<li><p>Use the post version format for rpm artifacts. [Stephen L Arnold]</p>
+<ul>
+<li><p>plain python .postN is a fedora-compatible format for version field</p></li>
+<li><p>use that to set the version in github rpms workflow artifacts</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id10">
+<h3>Fixes<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Run the yum builddep cmd with yes, cleanup artifact bits. [Stephen L
+Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id11">
+<h2>1.1.2 (2025-06-30)<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="id12">
+<h3>New<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add rpmbuild workflow for CI packages. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+<section id="id13">
+<h3>Changes<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Make sure dev versions sort correctly, cleanup spec bits. [Stephen L
+Arnold]</p></li>
+<li><p>Bump versions in spec and readme, switch to find namespace. [Stephen L
+Arnold]</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>Fixes<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Cleanup test imports and tox env, fix typo in setup.cfg. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>remove problematic test imports, use simple test class instead</p></li>
+<li><p>more spec file cleanup, update pre-commit to ignore test dir</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="other">
+<h3>Other<a class="headerlink" href="#other" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Fall back to setup.cfg for packaging metadata. [Stephen L Arnold]</p>
+<ul>
+<li><p>workaround for bug UNKNOWN 0.0.0</p></li>
+<li><p><a class="reference external" href="https://github.com/pypa/setuptools/issues/3269">https://github.com/pypa/setuptools/issues/3269</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id15">
+<h2>1.1.1 (2025-06-28)<a class="headerlink" href="#id15" title="Link to this heading"></a></h2>
+<section id="id16">
+<h3>Changes<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Relax build deps, remove runtime version imports, rename spec.
+[Stephen L Arnold]</p>
+<ul>
+<li><p>start generating a version file and refactor imports, cleanup tox envs</p></li>
+</ul>
+</li>
+<li><p>Add preliminary spec file for building rpms. [Stephen L Arnold]</p>
+<ul>
+<li><p>currently needs pyproject-rpm-macros from crb repos</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id17">
+<h2>1.1.0 (2025-06-27)<a class="headerlink" href="#id17" title="Link to this heading"></a></h2>
+<section id="id18">
+<h3>Changes<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Update workflows, add container workflow to test rpms. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>add a tox dev environment, remove .spec from gitignore</p></li>
+</ul>
+</li>
+<li><p>Still more cleanup in docs config and index. [Stephen L Arnold]</p></li>
+<li><p>Migrate package metadata to pyproject.toml, update project files.
+[Stephen L Arnold]</p>
+<ul>
+<li><p>update readme, pre-commit, and tox files</p></li>
+<li><p>remove MANIFEST.in and setup.cfg</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id19">
+<h3>Fixes<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Cleanup test imports and lint, update tox config. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id20">
+<h2>1.0.0 (2025-03-24)<a class="headerlink" href="#id20" title="Link to this heading"></a></h2>
+<section id="id21">
+<h3>New<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Generate a changelog and add to doc index. [Stephen L Arnold]</p></li>
+<li><p>Add tox cmd to generate changelog. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+<section id="id22">
+<h3>Changes<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add reuse badge and update changelog. [Stephen L Arnold]</p></li>
+<li><p>Add REUSE config and make LICENSE a symlink to the text. [Stephen L
+Arnold]</p></li>
+<li><p>Update tox cmds and python versions, adjust project config. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>update readme and add .gitchangelog.rc file</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id23">
+<h3>Fixes<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Disable link check in sphinx docs build workflow. [Stephen L Arnold]</p>
+<ul>
+<li><p>old changelog bits have too many crufty URLs</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id24">
+<h2>0.4.1 (2024-12-24)<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<section id="id25">
+<h3>Changes<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Early spring cleanup, update workflows and use setuptools_scm.
+[Stephen L Arnold]</p></li>
+</ul>
+</section>
+<section id="id26">
+<h3>Fixes<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Cleanup daemon args logging vs console output. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id27">
+<h2>0.4.0 (2023-09-20)<a class="headerlink" href="#id27" title="Link to this heading"></a></h2>
+<section id="id28">
+<h3>Changes<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Update docs, more packaging and coverage cleanup. [Stephen L Arnold]</p></li>
+<li><p>Upgrade all action versions to current. [Stephen L Arnold]</p></li>
+<li><p>Use upstream examples link instead of GH (not)permalink. [Stephen L
+Arnold]</p></li>
+<li><p>Cleanup/bump versions in pre-commit config. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+<section id="id29">
+<h3>Other<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>General cleanup, add py311 and update coverage workflow. [Stephen L
+Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id30">
+<h2>0.3.5 (2022-07-10)<a class="headerlink" href="#id30" title="Link to this heading"></a></h2>
+<section id="id31">
+<h3>Fixes<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>MANIFEST.in needs graft test to include all test files in sdist.
+[Stephen L Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id32">
+<h2>0.3.4 (2022-07-09)<a class="headerlink" href="#id32" title="Link to this heading"></a></h2>
+<section id="id33">
+<h3>Changes<a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add pointer to example daemon script, fix missing ref. [Stephen L
+Arnold]</p></li>
+<li><p>Add platform badge to readme. [Stephen L Arnold]</p></li>
+<li><p>Adjust test delay for macos, cleanup optional deps, packaging cfg.
+[Stephen L Arnold]</p></li>
+</ul>
+</section>
+<section id="id34">
+<h3>Fixes<a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Doc sources in sdist require the README.rst file. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id35">
+<h2>0.3.3 (2022-07-08)<a class="headerlink" href="#id35" title="Link to this heading"></a></h2>
+<section id="id36">
+<h3>Fixes<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Make sdist more complete, including test and doc srcs. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>keep exclude in setup.cfg, requires MANIFEST.in to graft srcs</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id37">
+<h2>0.3.2 (2022-07-04)<a class="headerlink" href="#id37" title="Link to this heading"></a></h2>
+<section id="id38">
+<h3>Changes<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>General readme cleanup, update args and example. [Stephen L Arnold]</p></li>
+<li><p>Add alternate-branches test, exclude NotImplemented funcs. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>must be subclassed by the consuming script</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id39">
+<h3>Fixes<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Restore missing closing paren. [Stephen L Arnold]</p></li>
+<li><p>Remove duplicate log msg and getLogger call. [Stephen L Arnold]</p>
+<ul>
+<li><p>add record_factory so we can set custom name in log record</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id40">
+<h2>0.3.1 (2022-06-30)<a class="headerlink" href="#id40" title="Link to this heading"></a></h2>
+<section id="id41">
+<h3>Changes<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Move test script to test directory, update tox file. [Stephen L
+Arnold]</p></li>
+</ul>
+</section>
+<section id="id42">
+<h3>Fixes<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Make sure artifact upload finds the right wheels. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id43">
+<h2>0.3.0 (2022-06-29)<a class="headerlink" href="#id43" title="Link to this heading"></a></h2>
+<section id="id44">
+<h3>New<a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add docs build, convert readme to rst, cleanup some docstrings.
+[Stephen L Arnold]</p></li>
+<li><p>Add base python package workflows, update tox file. [Stephen L Arnold]</p>
+<ul>
+<li><p>pylint seems to need a little extra foo</p></li>
+<li><p>no windows workflows for simple python daemons</p></li>
+</ul>
+</li>
+<li><p>Modern packaging, new tools, more deps and lint cleanup. [Stephen L
+Arnold]</p>
+<ul>
+<li><p>fix gevent.signal not a callable, apply isort cleanup</p></li>
+<li><p>add git versioning, cleanup string warnings</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id45">
+<h3>Changes<a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add coverage workflow and pkg name helper script. [Stephen L Arnold]</p>
+<ul>
+<li><p>add still-more-status to readme</p></li>
+</ul>
+</li>
+<li><p>Add tool configs, apply pre-commit cleanup. [Stephen L Arnold]</p></li>
+<li><p>Remove old py2 timezone helper, reformat logger src. [Stephen L
+Arnold]</p></li>
+</ul>
+</section>
+<section id="id46">
+<h3>Fixes<a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Enable syntax highlighting in the readme on github. [Stephen L Arnold]</p></li>
+<li><p>Use static badge since github does not grok the license. [Stephen L
+Arnold]</p></li>
+<li><p>Still more readme cleanup. [Stephen L Arnold]</p></li>
+<li><p>Add egg_info pre-command for import checks to tox file. [Stephen L
+Arnold]</p></li>
+<li><p>Fix tests and cleanup some archaic lint. [Stephen L Arnold]</p></li>
+</ul>
+</section>
+<section id="id47">
+<h3>Other<a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Doc: really fix license badge… [Stephen L Arnold]</p></li>
+<li><p>Add pylint section to tox.ini and cleanup some lint, fix osx. [Stephen
+L Arnold]</p></li>
+<li><p>Add coverage_python_version plugin to sort out test coverage. [Stephen
+L Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id48">
+<h2>0.2.3 (2020-03-13)<a class="headerlink" href="#id48" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add py27 timezone file back and update tests (see test_daemon.py
+comment) [Stephen Arnold]</p></li>
+<li><p>Setup.py: version bump and update classifiers. [Stephen Arnold]</p></li>
+<li><p>Keep py27 in CI for a while longer. [Stephen Arnold]</p></li>
+<li><p>Daemon/__init__.py: add status arg, returns self.is_running() [Stephen
+Arnold]</p></li>
+<li><p>.travis.yml: fix silly travis cfg… [Stephen Arnold]</p></li>
+<li><p>Test_daemon.py: fix tests for all test runners, restore tox cfg.
+[Stephen Arnold]</p></li>
+<li><p>Cleanup .travis.yml, remove tox.ini, correct test assert. [Stephen
+Arnold]</p></li>
+</ul>
+</section>
+<section id="id49">
+<h2>0.2.2 (2020-03-01)<a class="headerlink" href="#id49" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Dev-python/daemon: add pre-stop cleanup handler and remove py27
+support. [Stephen Arnold]</p></li>
+<li><p>Tox.ini: bump allowed line length by one character. [Stephen Arnold]</p></li>
+<li><p>Update logging format and switch README urls to freepn. [Stephen
+Arnold]</p></li>
+</ul>
+</section>
+<section id="id50">
+<h2>0.2.1 (2019-12-17)<a class="headerlink" href="#id50" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Setup.py: version bump. [Stephen Arnold]</p></li>
+<li><p>Revert move of test script, keep test settings file. [Stephen Arnold]</p></li>
+</ul>
+</section>
+<section id="id51">
+<h2>0.2.0 (2019-12-17)<a class="headerlink" href="#id51" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Setup.py: bump version for github release (pick up new helper modules)
+[Stephen Arnold]</p></li>
+<li><p>Settings.py: move test artifacts, only use settings for local testing.
+[Stephen Arnold]</p></li>
+<li><p>Add initial settings.py file for config options. [Stephen Arnold]</p></li>
+<li><p>Daemon/__init__.py: fix silly migration typo. [Stephen Arnold]</p></li>
+<li><p>Add timestamps and initial logging output for verbose=0, update
+.gitignore. [Stephen Arnold]</p></li>
+<li><p>.travis.yml: add os/x back to the testing matrix. [Stephen Arnold]</p></li>
+<li><p>.travis.yml: remove coveralls and add irc notify. [Stephen Arnold]</p></li>
+<li><p>Update py versions in setup.py and travis cfg, add tox.ini for
+test/cov. [Stephen Arnold]</p></li>
+<li><p>Revert “README.markdown: point travis in the right direction…”
+[Stephen Arnold]</p>
+<p>This reverts commit b00dd3c768bf596862c5d4974b21197f0d585983.</p>
+</li>
+<li><p>README.markdown: point travis in the right direction… [Stephen
+Arnold]</p></li>
+<li><p>Setup.py: add packages name for correct import. [Stephen Arnold]</p></li>
+<li><p>Mv daemon.py to daemon/__init__.py for packaging. [Stephen Arnold]</p></li>
+<li><p>Attempt to fix python 2.6 build. [Carlos Perelló Marín]</p></li>
+<li><p>Use flake8 to check python files. [Carlos Perelló Marín]</p></li>
+<li><p>Added travis build state. [Carlos Perelló Marín]</p></li>
+<li><p>Updated the notification secret. [Carlos Perelló Marín]</p></li>
+<li><p>Ignored bitcode files. [Carlos Perelló Marín]</p></li>
+<li><p>Added license text. [Carlos Perelló Marín]</p></li>
+<li><p>Updated setup.py with some ideas from <a class="reference external" href="https://github.com/amdei/python">https://github.com/amdei/python</a>-
+daemon/tree/py_daemon. [Carlos Perelló Marín]</p></li>
+<li><p>Initial travis config. [Carlos Perelló Marín]</p></li>
+<li><p>Add py3k support, drop 2.5- support, add tests. [jingchao]</p></li>
+<li><p>Add python 3 compatibility while preserving python 2.4+ compatibility.
+[Jonathan Barratt]</p></li>
+<li><p>Eventlet compatible. [Tony Wang]</p></li>
+<li><p>More python 3 compatible fix. [Tony Wang]</p></li>
+<li><p>Remove bug line. [Tony Wang]</p></li>
+<li><p>Add setup.py. [Tony Wang]</p></li>
+<li><p>Python 3 compatible. [Tony Wang]</p></li>
+<li><p>Log by verbose. [Tony Wang]</p></li>
+<li><p>Improve pid related. [Tony Wang]</p>
+<ul class="simple">
+<li><p>is_running: use os.kill to check if it’s still running</p></li>
+<li><p>delpid: remove pidfile only if it matches self pid</p></li>
+</ul>
+</li>
+<li><p>Using ‘is None’ instead of ‘== None’ [will mclafferty]</p></li>
+<li><p>Rename for_gevent to use_gevent. [Tony Wang]</p></li>
+<li><p>Add gevent support. [Tony Wang]</p></li>
+<li><p>Moving signal registration outside signal handler. [will mclafferty]</p>
+<p>also fixing pylint/pep8 warnings</p>
+</li>
+<li><p>Fix link. [Ben Sima]</p></li>
+<li><p>Raise exception if <code class="docutils literal notranslate"><span class="pre">run</span></code> has not been overridden. [Daniel Waardal]</p>
+<p>Raises the builtin NotImplementedError</p>
+</li>
+<li><p>Provide more useful output for is_running() [David Mytton]</p>
+<p>As suggested in comments <a class="reference external" href="https://github.com/serverdensity/python-daemon/commit/a304de8cef9d3483bf5ffc2b743947f98afb2ed8#commitcomment-9024066">https://github.com/serverdensity/python-daemon/commit/a304de8cef9d3483bf5ffc2b743947f98afb2ed8#commitcomment-9024066</a></p>
+</li>
+<li><p>Final pep8 fixes. [Jouke Thiemo Waleson]</p></li>
+<li><p>Added an is_running method. [Jouke Thiemo Waleson]</p></li>
+<li><p>Moved get_pid to separate method. [Jouke Thiemo Waleson]</p></li>
+<li><p>PEP8ified. [Jouke Thiemo Waleson]</p></li>
+<li><p>Send a SIGHUP if process won’t die. [Reid Ransom]</p></li>
+<li><p>Made Daemon extend object so that it can be extended in the usual way.
+[Jessamyn Smith]</p></li>
+<li><p>Add ability to pass arguments to start() and run() [Hadley Rich]</p></li>
+<li><p>Stderr forwarded to stdout if is None. [Dmitriy Narkevich]</p></li>
+<li><p>Added umask argument. [Dmitriy Narkevich]</p></li>
+<li><p>Added verbose argument for prints. [Dmitriy Narkevich]</p></li>
+<li><p>Added home_dir argument to __init__ function. [Dmitriy Narkevich]</p></li>
+<li><p>Added daemon_alive flag and SIGTERM/SIGINT handler. [Dmitriy
+Narkevich]</p></li>
+<li><p>Added notes about foreground mode. [David Mytton]</p></li>
+<li><p>Make names consistent. [David Mytton]</p></li>
+<li><p>Adjusted URL format in readme. [David Mytton]</p></li>
+<li><p>Moved readme to markdown. [David Mytton]</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api/daemonizer.parent_logger.html" class="btn btn-neutral float-left" title="daemonizer.parent_logger module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019 - 2025 Stephen Arnold.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
