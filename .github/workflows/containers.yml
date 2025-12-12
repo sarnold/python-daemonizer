@@ -111,7 +111,7 @@ jobs:
     - name: Manually create pip cache dir
       run: mkdir -p ~/.cache/pip
 
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       id: cache
       env:
         cache-name: cache-pip
@@ -141,7 +141,7 @@ jobs:
       env:
         SETUPTOOLS_SCM_PRETEND_VERSION: ${{ needs.get_version.outputs.version }}
 
-    - uses: actions/upload-artifact@v5
+    - uses: actions/upload-artifact@v6
       if: matrix.image == 'rockylinux:9'
       with:
         name: bdist_rpms

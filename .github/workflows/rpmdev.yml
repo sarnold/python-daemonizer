@@ -83,7 +83,7 @@ jobs:
     - name: Manually create pip cache dir
       run: mkdir -p ~/.cache/pip
 
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       id: cache
       env:
         cache-name: cache-pip
@@ -101,7 +101,7 @@ jobs:
         VERSION: ${{ needs.get_version.outputs.version }}
 
     - name: Upload rpm files
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: "daemonizer-${{ needs.get_version.outputs.version }}.${{ matrix.name }}-rpms"
         path: |
