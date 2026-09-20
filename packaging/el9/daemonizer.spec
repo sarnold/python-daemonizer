@@ -4,8 +4,8 @@
 
 %global srcname daemonizer
 
-Name:           python-%{srcname}
-Version:        VER_GOES_HERE
+Name:           python-daemonizer
+Version:        1.1.8
 Release:        1%{?dist}
 Summary:        Python daemonizer for Unix, Linux and OS X
 
@@ -68,6 +68,10 @@ foreground mode.
 %license LICENSES REUSE.toml
 
 %changelog
+* Sun Sep 20 2026 Stephen Arnold <nerdboy422@gmail.com> - 1.1.8
+- Refactor packaging support and rpm versioning
+* Sun Nov 02 2025 Stephen Arnold <nerdboy422@gmail.com> - 1.1.7
+- Reset logging level in is_running() to info
 * Wed Sep 04 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.5
 - Update packaging and build env, stop generating version file
 * Wed Sep 03 2025 Stephen Arnold <nerdboy@gentoo.org> - 1.1.4
