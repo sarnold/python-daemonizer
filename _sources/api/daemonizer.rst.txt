@@ -1,0 +1,18 @@
+daemonizer package
+==================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   daemonizer.parent_logger
+
+Module contents
+---------------
+
+.. automodule:: daemonizer
+   :members:
+   :undoc-members:
+   :show-inheritance:
