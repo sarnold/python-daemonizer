@@ -37,18 +37,18 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - debian:bookworm
+          - debian:trixie
           - debian:sid
           - fedora:latest
           - fedora:rawhide
           - rockylinux:9
         include:
-          - image: debian:bookworm
-            pkgs: python3.11-venv
-            py3: python3
-          - image: debian:sid
+          - image: debian:trixie
             pkgs: python3.13-venv
             py3: python3
+          - image: debian:sid
+            pkgs: python3.14-venv
+            py3: python3.14
           - image: fedora:latest
             pkgs: python3-devel python3-pip
             py3: python3
@@ -86,7 +86,7 @@ jobs:
     # Work-around for https://github.com/actions/runner-images/issues/6775
     - name: Change Owner of Container Working Directory
       if: matrix.image
-      run: chown root.root .
+      run: chown root:root .
 
     - name: Deps for python (debs)
       if: startsWith(matrix.image, 'deb')
@@ -128,21 +128,8 @@ jobs:
         .venv/bin/pip3 install tox
 
     - name: Build dist pkgs
-      if: matrix.image != 'rockylinux:9'
+      # if: matrix.image != 'rockylinux:9'
       run: |
         .venv/bin/tox -e build,check
       env:
         SETUPTOOLS_SCM_PRETEND_VERSION: ${{ needs.get_version.outputs.version }}
-
-    - name: Build bdist_rpm pkgs
-      if: matrix.image == 'rockylinux:9'
-      run: |
-        .venv/bin/python3 setup.py bdist_rpm --python /usr/bin/python3 --requires setuptools-scm
-      env:
-        SETUPTOOLS_SCM_PRETEND_VERSION: ${{ needs.get_version.outputs.version }}
-
-    - uses: actions/upload-artifact@v7
-      if: matrix.image == 'rockylinux:9'
-      with:
-        name: bdist_rpms
-        path: dist

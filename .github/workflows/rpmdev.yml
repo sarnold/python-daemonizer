@@ -64,20 +64,20 @@ jobs:
     # Work-around for https://github.com/actions/runner-images/issues/6775
     - name: Change Owner of Container Working Directory
       if: matrix.image
-      run: chown root.root .
+      run: chown root:root .
 
     - name: Check version and update spec
       env:
         VERSION: ${{ needs.get_version.outputs.version }}
       run: |
         echo "Dev version from git: ${VERSION}"
-        sed -e s"|VER_GOES_HERE|${VERSION}|" packaging/el9/daemonizer.spec > daemonizer.spec
+        sed -e "s|\(Version:        \).*|\1${VERSION}|" packaging/el9/daemonizer.spec > daemonizer.spec
 
     - name: Deps for rpm builds (centos/rocky)
       run: |
-        dnf install -y dnf-utils 'dnf-command(config-manager)'
+        dnf install -y dnf-utils epel-release 'dnf-command(config-manager)'
         dnf config-manager --set-enabled crb
-        dnf install -y sudo git make wget rpm-build rpm-devel rpmlint rpmdevtools python3-pip
+        dnf install --setopt=install_weak_deps=False -y sudo git make wget rpm-build rpm-devel rpmlint rpmdevtools python3-pip
         dnf -y builddep --spec daemonizer.spec
 
     - name: Manually create pip cache dir

@@ -7,12 +7,14 @@ ifeq ($(VERSION),)
 VERSION := $(shell git describe --tags | sed -e "s/-\([0-9]*\).*/.post\1/")
 endif
 
-PACKAGE = daemonizer-$(VERSION)
+NAME = daemonizer
+
+PACKAGE = $(NAME)-$(VERSION)
 ifndef USERNAME
     USERNAME = echo $$USER
 endif
 FILES = LICENSE* *.rst *.toml tox* setup.* \
-		Makefile daemonizer.spec conftest.py \
+		Makefile $(NAME).spec conftest.py \
 		docs src test
 
 
@@ -27,23 +29,23 @@ tmp:
 
 # RPM packaging
 spec:
-	sed -e s"|VER_GOES_HERE|$(VERSION)|" packaging/el9/daemonizer.spec > daemonizer.spec
+	sed -e "s|\(Version:        \).*|\1${VERSION}|" packaging/el9/$(NAME).spec > $(NAME).spec
 source: spec
 	mkdir -p $(TMP)/SOURCES
 	mkdir -p $(TMP)/$(PACKAGE)
 	cp -a $(FILES) $(TMP)/$(PACKAGE)
 tarball: source
 	cd $(TMP) && tar czf SOURCES/$(PACKAGE).tar.gz $(PACKAGE)
-	@echo ./tmp/SOURCES/$(PACKAGE).tar.gz
+	@echo $(TMP)/SOURCES/$(PACKAGE).tar.gz
 version:
 	@echo "$(VERSION)"
 rpm: tarball
-	rpmbuild --define '_topdir $(TMP)' -bb daemonizer.spec
+	rpmbuild --define '_topdir $(TMP)' -bb $(NAME).spec
 srpm: tarball
-	rpmbuild --define '_topdir $(TMP)' -bs daemonizer.spec
+	rpmbuild --define '_topdir $(TMP)' -bs $(NAME).spec
 packages: rpm srpm
 
 clean:
-	rm -f daemonizer.spec
+	rm -f $(NAME).spec
 	rm -rf $(TMP)
-	rm -rf .cache .pytest_cache
+	rm -rf .cache .pytest_cache __pycache__
